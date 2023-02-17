@@ -16,7 +16,7 @@ const MainBaseButton = styled((props: CustomButtonProps) => (
     fullWidth
     {...props}
     sx={{
-      backgroundColor: props.bgcolor ? props.bgcolor : "secondary.300",
+      backgroundColor: props.bgcolor ? props.bgcolor : "primary.main",
       borderRadius: props.bradius ? props.bradius : "10px",
       fontSize: props.fsize ? props.fsize : "16px",
       color: props.color ? props.color : "#FFF",

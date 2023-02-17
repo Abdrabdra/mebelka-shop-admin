@@ -21,7 +21,7 @@ export const StyledMainInput = styled((props: CustomTextFieldProps) => (
 				color: props.color ? props.color : "common.black",
 
 				"& fieldset": {
-					borderColor: props.bordercolor ? props.bordercolor : "transparent"
+					borderColor: props.bordercolor ? props.bordercolor : "primary.main"
 				}
 			}
 		}}

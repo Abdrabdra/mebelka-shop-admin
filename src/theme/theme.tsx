@@ -336,7 +336,7 @@ export const theme = createTheme({
     },
     secondary: {
       main: "#F4F4F4",
-      light: "#65B7C4",
+      light: "#F2F4F6",
     },
     error: {
       main: "#FD4444",

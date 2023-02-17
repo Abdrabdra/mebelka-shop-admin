@@ -50,16 +50,6 @@ const links = [
     route: "order",
     icon: LocalShippingRoundedIcon,
   },
-  {
-    text: "Пользователи",
-    route: "user",
-    icon: GroupRoundedIcon,
-  },
-  {
-    text: "Магазины",
-    route: "shop",
-    icon: StoreRoundedIcon,
-  },
 ];
 
 const DrawerAdmin = () => {

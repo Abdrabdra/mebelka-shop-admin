@@ -11,12 +11,10 @@ import Layout from "../../components/layouts";
 
 //pages
 import Profile from "../Profile";
-import Users from "../Users";
 
 import Management from "../Management";
 import Announcement from "../Announcement";
 import Order from "../Order";
-import Shop from "../Shop";
 
 const Main = () => {
   // debugger
@@ -35,8 +33,6 @@ const Main = () => {
           <Route path="profile/*" element={<Profile />} />
           <Route path="announcement/*" element={<Announcement />} />
           <Route path="order/*" element={<Order />} />
-          <Route path="user/*" element={<Users />} />
-          <Route path="shop/*" element={<Shop />} />
 
           <Route path="announcement/*" element={<Announcement />} />
 

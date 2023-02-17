@@ -7,6 +7,7 @@ import { HeaderBlock, Poster } from "../mainStyle";
 import Error from "../Error";
 import AnnouncementList from "./AnnouncementList";
 import AnnouncementOne from "./AnnouncementOne";
+import AnnouncementCreate from "./AnnouncementCreate";
 
 const Announcement = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Announcement = () => {
 
           <Route path={"list"} element={<AnnouncementList />} />
           <Route path={"one/:announceId"} element={<AnnouncementOne />} />
+          <Route path={"create"} element={<AnnouncementCreate />} />
 
           <Route path={"*"} element={<Error />} />
         </Routes>

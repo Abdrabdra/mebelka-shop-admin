@@ -1,12 +1,16 @@
 import managementApi from "./managementApi";
 import { IGetMarkaResponse } from "../../../../types/Management/Marka";
+import {
+  IProductColor,
+  IProductIFrame,
+} from "../../../../types/Management/IProductInfo";
 
 export const managementEndpoints = managementApi.injectEndpoints({
   endpoints: (builder) => ({
     getCategory: builder.query<IGetMarkaResponse, any>({
       query: (arg) => ({
         url: `category`,
-        params: { parentId: arg.parentId },
+        params: { parentId: arg?.parentId },
         method: "GET",
       }),
       providesTags: ["category"],
@@ -29,23 +33,27 @@ export const managementEndpoints = managementApi.injectEndpoints({
       }),
     }),
 
-    getProductColor: builder.query<IGetMarkaResponse, any>({
+    getProductColor: builder.query<IProductColor[], any>({
       query: () => ({
         url: `product-info/color`,
         method: "GET",
       }),
-      providesTags: ["product-info"],
+      providesTags: ["product-info-color"],
     }),
-    createProductColor: builder.mutation<any, { title: string; value: string }>(
-      {
-        query: (body) => ({
-          url: "product-info/color",
-          method: "POST",
-          body,
-        }),
-        invalidatesTags: ["product-info"],
-      }
-    ),
+    getProductDecor: builder.query<IProductIFrame[], any>({
+      query: () => ({
+        url: `product-info/decor`,
+        method: "GET",
+      }),
+      providesTags: ["product-info-decor"],
+    }),
+    getProductFrame: builder.query<IProductIFrame[], any>({
+      query: () => ({
+        url: `product-info/frame`,
+        method: "GET",
+      }),
+      providesTags: ["product-info-frame"],
+    }),
   }),
 });
 
@@ -53,4 +61,8 @@ export const {
   useGetCategoryQuery,
   useCreateCategoryMutation,
   useDeleteCategoryMutation,
+
+  useGetProductColorQuery,
+  useGetProductDecorQuery,
+  useGetProductFrameQuery,
 } = managementEndpoints;
