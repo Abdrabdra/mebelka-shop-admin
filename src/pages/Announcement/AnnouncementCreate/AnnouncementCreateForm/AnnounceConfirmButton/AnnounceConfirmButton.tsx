@@ -11,6 +11,7 @@ const AnnounceConfirmButton = () => {
 
   useEffect(() => {
     if (
+      values.file.length > 0 &&
       values.title &&
       values.production &&
       values.cityId &&
@@ -25,21 +26,20 @@ const AnnounceConfirmButton = () => {
     }
   }, [values]);
 
-  const [create] = useCreateProductMutation();
+  const [create, { isSuccess, isError, error }] = useCreateProductMutation();
 
   const formData = new FormData();
 
-  formData.append("file", "");
+  for (let i = 0; i < values.file.length; i++) {
+    formData.append("file", values.file[i]);
+  }
+
   formData.append("title", values.title);
   formData.append("price", String(values.price));
   formData.append("categoryId", String(values.categoryId));
 
-  for (let i = 0; i < values.colors.length; i++) {
-    formData.append("colors", String(values.colors[i]));
-  }
-  for (let i = 0; i < values.frames.length; i++) {
-    formData.append("frames", String(values.frames[i]));
-  }
+  formData.append("colors", values.colors.join(","));
+  formData.append("frames", values.frames.join(","));
 
   formData.append("length", String(values.length));
   formData.append("width", String(values.width));
@@ -63,9 +63,22 @@ const AnnounceConfirmButton = () => {
         disabled={isFilled ? false : true}
         sx={{ maxWidth: "125px" }}
       >
-        asd
+        Создать Карточку
       </MainBaseButton>
+
       {!isFilled && <Typography>Заполните выше указанные поля!</Typography>}
+
+      {isSuccess && (
+        <Typography sx={{ color: "success.main" }}>
+          Успешно Отправлено!
+        </Typography>
+      )}
+
+      {isError && (
+        <Typography sx={{ color: "error.main" }}>
+          Ошибка при отправке!
+        </Typography>
+      )}
     </Stack>
   );
 };

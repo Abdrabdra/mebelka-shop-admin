@@ -53,19 +53,19 @@ const initialState: IInitState = {
   },
 };
 
-const filterReducer = createSlice({
-  name: "filter",
+const filterPorductSlice = createSlice({
+  name: "filterPorducts",
   initialState,
   reducers: {
-    setFilter: (state, { payload }) => {
+    setFilterProduct: (state, { payload }) => {
       state.values = { ...state.values, ...payload };
     },
-    setFilterReset: (state) => {
+    setFilterProductReset: (state) => {
       state.values = initialState.values;
     },
   },
 });
 
-export const { setFilter, setFilterReset } = filterReducer.actions;
+export const { setFilterProduct, setFilterProductReset } = filterPorductSlice.actions;
 
-export default filterReducer.reducer;
+export default filterPorductSlice.reducer;

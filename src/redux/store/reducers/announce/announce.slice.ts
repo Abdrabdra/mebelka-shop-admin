@@ -5,6 +5,8 @@ interface IInitState {
     parentCategory: boolean;
   };
   values: {
+    file: File[];
+
     title: string;
     price: number;
     categoryId?: number;
@@ -29,6 +31,8 @@ const initialState: IInitState = {
     parentCategory: false,
   },
   values: {
+    file: [],
+
     title: "",
     price: 0,
     categoryId: undefined,

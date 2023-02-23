@@ -25,13 +25,14 @@ const AnnounceColor = () => {
   const { data } = useGetProductColorQuery("");
   const dispatch = useDispatch();
 
-  const [color, setColor] = useState<string[]>([]);
+  const [color, setColor] = useState<number[]>([]);
 
   const handleChange = (event: SelectChangeEvent<typeof color>) => {
     const {
       target: { value },
     } = event;
-    setColor(typeof value === "string" ? value.split(",") : value);
+
+    setColor(value as number[]);
     dispatch(setAnnounce({ colors: value }));
   };
 
@@ -54,9 +55,12 @@ const AnnounceColor = () => {
           MenuProps={MenuProps}
         >
           {data?.map((row) => (
-            <MenuItem key={row.id} value={row.title}>
-              <Checkbox checked={color.indexOf(row.title) > -1} />
-              <ListItemText primary={row.title} />
+            <MenuItem key={row.id} value={row.id}>
+              <Checkbox checked={color.indexOf(row.id) > -1} />
+              <Stack direction="row" spacing={1}>
+                <Typography>id: {row.id}</Typography>
+                <ListItemText primary={row.title} />
+              </Stack>
               <Box
                 sx={{
                   backgroundColor: row.value,

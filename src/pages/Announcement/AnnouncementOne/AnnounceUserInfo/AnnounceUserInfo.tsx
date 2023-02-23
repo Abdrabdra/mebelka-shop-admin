@@ -1,10 +1,9 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import ChipStatus from "../../../../components/Chip/ChipStatus";
-import { IOneAnnouncementResponse } from "../../../../types/Announcement/OneAnnouncement.type";
 
 interface Props {
-  announceData: IOneAnnouncementResponse;
+  announceData: any;
 }
 
 const AnnounceUserInfo: FC<Props> = ({ announceData }) => {

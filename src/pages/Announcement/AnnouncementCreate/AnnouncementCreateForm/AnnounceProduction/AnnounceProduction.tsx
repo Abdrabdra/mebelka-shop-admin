@@ -19,12 +19,12 @@ const AnnounceProduction = () => {
 
   return (
     <Stack spacing={1}>
-      <FormTitle title="Название Production" />
+      <FormTitle title="Название Производителя" />
       <StyledMainInput
         onChange={(e) => handleChange(e)}
         value={announceProduction}
         required
-        placeholder="Введите Production"
+        placeholder="Введите Производителя"
       />
     </Stack>
   );

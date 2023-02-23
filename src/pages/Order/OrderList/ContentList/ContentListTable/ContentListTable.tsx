@@ -20,16 +20,13 @@ import {
   StyledHeadRow,
   TableDivider,
 } from "../../../../../components/Table/TableRounded/TableRounded.module";
-import {
-  IAdminAnnouncement,
-  IAnnouncement,
-} from "../../../../../types/Announcement/Announcement.type";
+
 import numberWithSpaces from "../../../../../utils/numberWithSpaces";
 
 const tableHead = ["Объявление", "Статус", "Категория"];
 
 interface Props {
-  tableData: IAdminAnnouncement[];
+  tableData: any;
 }
 
 const ContentListTable: FC<Props> = ({ tableData }) => {
@@ -55,7 +52,7 @@ const ContentListTable: FC<Props> = ({ tableData }) => {
         </TableHead>
 
         <TableBody>
-          {tableData.map((row) => (
+          {/* {tableData.map((row) => (
             <StyledBodyRow key={row.id}>
               <StyledBodyCellFirst>
                 <Stack direction="row" spacing={1}>
@@ -89,7 +86,7 @@ const ContentListTable: FC<Props> = ({ tableData }) => {
                 </MainBaseButton>
               </StyledBodyCellLast>
             </StyledBodyRow>
-          ))}
+          ))} */}
         </TableBody>
       </Table>
     </TableContainer>

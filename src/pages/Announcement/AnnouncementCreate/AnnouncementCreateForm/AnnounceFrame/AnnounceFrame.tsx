@@ -9,6 +9,7 @@ import {
   Select,
   SelectChangeEvent,
   Stack,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -22,13 +23,13 @@ const AnnounceFrame = () => {
   const { data } = useGetProductFrameQuery("");
   const dispatch = useDispatch();
 
-  const [frame, setFrame] = useState<string[]>([]);
+  const [frame, setFrame] = useState<number[]>([]);
 
   const handleChange = (event: SelectChangeEvent<typeof frame>) => {
     const {
       target: { value },
     } = event;
-    setFrame(typeof value === "string" ? value.split(",") : value);
+    setFrame(value as number[]);
     dispatch(setAnnounce({ frames: value }));
   };
 
@@ -51,9 +52,12 @@ const AnnounceFrame = () => {
           MenuProps={MenuProps}
         >
           {data?.map((row) => (
-            <MenuItem key={row.id} value={row.title}>
-              <Checkbox checked={frame.indexOf(row.title) > -1} />
-              <ListItemText primary={row.title} />
+            <MenuItem key={row.id} value={row.id}>
+              <Checkbox checked={frame.indexOf(row.id) > -1} />
+              <Stack direction="row" spacing={1}>
+                <Typography>id: {row.id}</Typography>
+                <ListItemText primary={row.title} />
+              </Stack>
             </MenuItem>
           ))}
         </Select>

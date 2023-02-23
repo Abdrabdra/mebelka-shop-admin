@@ -1,12 +1,10 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import { $image_api } from "../../../../api";
-import { IOneAnnouncementResponse } from "../../../../types/Announcement/OneAnnouncement.type";
-import { StatementEnum, WheelEnum } from "../../../../types/Enums";
 import numberWithSpaces from "../../../../utils/numberWithSpaces";
 
 interface Props {
-  aData: IOneAnnouncementResponse;
+  aData: any;
 }
 
 const AnnounceBox: FC<Props> = ({ aData }) => {
@@ -202,7 +200,7 @@ const AnnounceBox: FC<Props> = ({ aData }) => {
                     fontWeight: 500,
                   }}
                 >
-                  {row.id === 3
+                  {/* {row.id === 3
                     ? `${row.value}л`
                     : row.id === 4
                     ? row.value
@@ -220,7 +218,7 @@ const AnnounceBox: FC<Props> = ({ aData }) => {
                       : row.value === StatementEnum.NEW
                       ? "Новое"
                       : "Б/У"
-                    : row.value}
+                    : row.value} */}
                 </Typography>
               </Box>
               {stateData.length !== row.id + 1 && <Divider />}

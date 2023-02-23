@@ -7,8 +7,8 @@ import user from "./../store/reducers/user/user.slice";
 import staff from "./../store/reducers/staff/staff.slice";
 import profile from "./reducers/profile/profile.slice";
 import authReducer from "./reducers/auth/auth.slice";
-import filterReducer from "./reducers/filter/filter.slice";
 import announceReducer from "./reducers/announce/announce.slice";
+import filterProductReducer from "./reducers/filter/filterProduct/filterProduct.slice";
 
 //rtk
 import profileApi from "./rtk-api/profile-rtk/profileApi";
@@ -20,8 +20,8 @@ import productApi from "./rtk-api/product-rtk/productApi";
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  filter: filterReducer,
   announce: announceReducer,
+  filterProduct: filterProductReducer,
 
   [managementApi.reducerPath]: managementApi.reducer,
   [cityApi.reducerPath]: cityApi.reducer,

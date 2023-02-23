@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { useTypedSelector } from "../../../../redux/store";
-import { setFilter } from "../../../../redux/store/reducers/filter/filter.slice";
+import { setFilterProduct } from "../../../../redux/store/reducers/filter/filterProduct/filterProduct.slice";
 
 interface Props {
   count: number;
@@ -12,12 +12,14 @@ interface Props {
 const ContentListPagination: FC<Props> = ({ count }) => {
   const dispatch = useDispatch();
   const totalPages = Math.ceil(count / 5);
-  const selectedPage = useTypedSelector((state) => state.filter.values.page);
+  const selectedPage = useTypedSelector(
+    (state) => state.filterProduct.values.page
+  );
 
   const [page, setPage] = useState(selectedPage);
   const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
-    dispatch(setFilter({ page: value }));
+    dispatch(setFilterProduct({ page: value }));
   };
 
   return count ? (
