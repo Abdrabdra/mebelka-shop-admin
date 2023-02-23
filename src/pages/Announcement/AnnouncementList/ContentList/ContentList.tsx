@@ -10,11 +10,10 @@ import { useGetAnnouncementsQuery } from "../../../../redux/store/rtk-api/announ
 interface Props {
   forArchive?: boolean;
   forMyAnnouncements?: boolean;
-  getCounts?: (value: number) => void;
   withoutPagination?: boolean;
 }
 
-const ContentList: FC<Props> = ({ getCounts, withoutPagination }) => {
+const ContentList: FC<Props> = ({ withoutPagination }) => {
   const filterProductValues = useTypedSelector(
     (state) => state.filterProduct.values
   );
@@ -30,11 +29,7 @@ const ContentList: FC<Props> = ({ getCounts, withoutPagination }) => {
     }
   );
 
-  useEffect(() => {
-    if (isSuccess) {
-      getCounts && getCounts(data.count);
-    }
-  }, [data]);
+  console.log(data)
 
   return (
     <Stack spacing={1.5}>

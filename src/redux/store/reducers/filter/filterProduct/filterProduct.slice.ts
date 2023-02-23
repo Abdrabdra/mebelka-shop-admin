@@ -15,15 +15,15 @@ interface IInitState {
     limit: number;
     page: number;
 
-    marks: number[];
-    models: number[];
+    // marks: number[];
+    // models: number[];
 
-    yearTo: string;
-    yearFrom: string;
-    orderByPriceASC: string;
-    orderByPriceDESC: string;
-    priceTo: string;
-    priceFrom: string;
+    // yearTo: string;
+    // yearFrom: string;
+    // orderByPriceASC: string;
+    // orderByPriceDESC: string;
+    // priceTo: string;
+    // priceFrom: string;
   };
 }
 
@@ -41,15 +41,15 @@ const initialState: IInitState = {
     limit: 5,
     page: 1,
 
-    marks: [],
-    models: [],
+    // marks: [],
+    // models: [],
 
-    yearFrom: "",
-    yearTo: "",
-    orderByPriceASC: "",
-    orderByPriceDESC: "",
-    priceFrom: "",
-    priceTo: "",
+    // yearFrom: "",
+    // yearTo: "",
+    // orderByPriceASC: "",
+    // orderByPriceDESC: "",
+    // priceFrom: "",
+    // priceTo: "",
   },
 };
 
