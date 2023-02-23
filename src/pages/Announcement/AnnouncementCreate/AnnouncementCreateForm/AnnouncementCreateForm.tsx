@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Stack, Typography } from "@mui/material";
 
 import AnnounceFile from "./AnnounceFile";
@@ -15,25 +15,44 @@ import AnnounceConfirmButton from "./AnnounceConfirmButton";
 import AnnounceProduction from "./AnnounceProduction";
 import AnnounceCity from "./AnnounceCity";
 import AnnounceDiscount from "./AnnounceDiscount";
+import { IOneAnnouncement } from "../../../../types/Announcement/OneAnnouncement.type";
+import { useDispatch } from "react-redux";
+import { refresh } from "../../../../redux/store/reducers/auth/auth.action";
+import { AppDispatch } from "../../../../redux/store";
 
-const AnnouncementCreateForm = () => {
+interface FormProps {
+  forUpdate?: boolean;
+  updateData?: IOneAnnouncement;
+}
+
+const AnnouncementCreateForm: FC<FormProps> = ({ forUpdate, updateData }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(refresh());
+  }, []);
+
   return (
     <Stack spacing={2.5}>
-      <AnnounceFile />
-      <AnnounceTitle />
-      <AnnounceProduction />
-      <AnnounceCity />
-      <AnnouncePrice />
-      <AnnounceDiscount />
-      <AnnounceCategory />
-      <AnnounceColor />
-      <AnnounceSizes />
-      <AnnounceFrame />
-      <AnnounceDecor />
-      <AnnounceLiftingMechanism />
-      <AnnounceLaundryBoxes />
+      <AnnounceFile prevData={updateData?.images} />
+      <AnnounceTitle prevData={updateData?.title} />
+      <AnnounceProduction prevData={updateData?.info.production} />
+      <AnnounceCity prevData={updateData?.city.id} />
+      <AnnouncePrice prevData={updateData?.price} />
+      <AnnounceDiscount prevData={updateData?.discount} />
+      <AnnounceCategory blocked={forUpdate ? true : false} />
+      <AnnounceColor prevData={updateData?.colors.map((row) => row.id)} />
+      <AnnounceSizes
+        iheight={updateData?.info.height}
+        ilength={updateData?.info.length}
+        iwidth={updateData?.info.width}
+      />
+      <AnnounceFrame prevData={updateData?.info.frames.map((row) => row.id)} />
+      <AnnounceDecor prevData={updateData?.info.id} />
+      <AnnounceLiftingMechanism prevData={updateData?.info.liftingMechanism} />
+      <AnnounceLaundryBoxes prevData={updateData?.info.laundryBoxes} />
 
-      <AnnounceConfirmButton />
+      <AnnounceConfirmButton forUpdate={forUpdate} />
     </Stack>
   );
 };

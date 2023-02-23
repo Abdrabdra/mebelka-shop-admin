@@ -1,15 +1,23 @@
 import { Box, Stack } from "@mui/material";
+import { FC } from "react";
+import { IImages } from "../../../../../types/Announcement/OneAnnouncement.type";
 import { FormTitle } from "../AnnouncementCreateForm";
 import ListImages from "./ListImages";
 import UploadFile from "./UploadFile";
 
-const AnnounceFile = () => {
+interface Props {
+  prevData?: IImages[];
+}
+
+const AnnounceFile: FC<Props> = ({ prevData }) => {
+  console.log(prevData);
+  
   return (
     <Stack spacing={1}>
       <FormTitle title="Фото" />
       <Stack direction="row" spacing={3} alignItems="center">
         <UploadFile />
-        <ListImages />
+        <ListImages prevData={prevData?.map((row) => row.imageUrl)} />
       </Stack>
     </Stack>
   );

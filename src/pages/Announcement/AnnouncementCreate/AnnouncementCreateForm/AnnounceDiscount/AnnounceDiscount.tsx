@@ -1,12 +1,22 @@
 import { Stack } from "@mui/material";
+import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { StyledMainInput } from "../../../../../components/Input/StyledMainInput";
 import { useTypedSelector } from "../../../../../redux/store";
 import { setAnnounce } from "../../../../../redux/store/reducers/announce/announce.slice";
 import { FormTitle } from "../AnnouncementCreateForm";
 
-const AnnounceDiscount = () => {
+interface Props {
+  prevData?: number;
+}
+
+const AnnounceDiscount: FC<Props> = ({ prevData }) => {
   const dispatch = useDispatch();
+
+  if (prevData) {
+    dispatch(setAnnounce({ discount: prevData }));
+  }
+
   const announceDiscount = useTypedSelector(
     (state) => state.announce.values.discount
   );

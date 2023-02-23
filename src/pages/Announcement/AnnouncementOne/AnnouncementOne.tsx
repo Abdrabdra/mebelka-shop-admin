@@ -1,17 +1,14 @@
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import GoBackButton from "../../../components/Button/GoBackButton";
-import MainBaseButton from "../../../components/Button/MainBaseButton/MainBaseButton";
-import { useGetOneAnnouncementQuery } from "../../../redux/store/rtk-api/announcement-rtk/announcementEndpoints";
-import AnnounceBox from "./AnnounceBox";
+import { useGetOneProductQuery } from "../../../redux/store/rtk-api/product-rtk/productEndpoints";
+import AnnouncementCreateForm from "../AnnouncementCreate/AnnouncementCreateForm";
 
 import AnnounceHeader from "./AnnounceHeader";
-import AnnounceUserInfo from "./AnnounceUserInfo";
 
 const AnnouncementOne = () => {
   const { announceId } = useParams();
 
-  const { data, isLoading, isSuccess } = useGetOneAnnouncementQuery(
+  const { data, isLoading, isSuccess } = useGetOneProductQuery(
     announceId ? announceId : ""
   );
 
@@ -22,9 +19,19 @@ const AnnouncementOne = () => {
       {isLoading ? (
         "Загрузка..."
       ) : isSuccess ? (
-        <Stack spacing={4}>
-          <AnnounceUserInfo announceData={data} />
-          <AnnounceBox aData={data} />
+        <Stack
+          spacing={2}
+          sx={{
+            padding: "30px",
+            borderRadius: "10px",
+            backgroundColor: "common.white",
+          }}
+        >
+          <Typography sx={{ fontSize: "20px", fontWeight: 600 }}>
+            Редактирование
+          </Typography>
+
+          <AnnouncementCreateForm forUpdate={true} updateData={data} />
         </Stack>
       ) : (
         "Ошибка при загрузки"

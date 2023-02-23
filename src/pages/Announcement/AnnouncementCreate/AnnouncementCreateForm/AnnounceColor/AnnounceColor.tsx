@@ -12,20 +12,37 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { StyledMainInput } from "../../../../../components/Input/StyledMainInput";
 import { useTypedSelector } from "../../../../../redux/store";
 import { setAnnounce } from "../../../../../redux/store/reducers/announce/announce.slice";
 import { useGetProductColorQuery } from "../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
+import { IColors } from "../../../../../types/Announcement/OneAnnouncement.type";
 import { FormTitle } from "../AnnouncementCreateForm";
 import { MenuProps } from "./ColorCheckmarks.utils";
 
-const AnnounceColor = () => {
+interface Props {
+  prevData?: number[];
+}
+
+const AnnounceColor: FC<Props> = ({ prevData }) => {
   const { data } = useGetProductColorQuery("");
   const dispatch = useDispatch();
 
-  const [color, setColor] = useState<number[]>([]);
+  if (prevData) {
+    dispatch(setAnnounce({ colors: prevData }));
+  }
+
+  const selectedValues = useTypedSelector(
+    (state) => state.announce.values.colors
+  );
+
+  const [color, setColor] = useState<number[]>(selectedValues);
+
+  useEffect(() => {
+    setColor(selectedValues as number[]);
+  }, [selectedValues]);
 
   const handleChange = (event: SelectChangeEvent<typeof color>) => {
     const {

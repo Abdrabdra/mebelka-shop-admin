@@ -6,7 +6,7 @@ import {
   SelectChangeEvent,
   Stack,
 } from "@mui/material";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../../../../redux/store";
 import { setIsSelected } from "../../../../../redux/store/reducers/announce/announce.slice";
@@ -14,7 +14,11 @@ import { useGetCategoryQuery } from "../../../../../redux/store/rtk-api/manageme
 import { FormTitle } from "../AnnouncementCreateForm";
 import ChildCategory from "./ChildCategory";
 
-const AnnounceCategory = () => {
+interface Props {
+  blocked: boolean;
+}
+
+const AnnounceCategory: FC<Props> = ({ blocked }) => {
   const dispatch = useDispatch();
   const { data } = useGetCategoryQuery("");
 
@@ -39,6 +43,7 @@ const AnnounceCategory = () => {
             value={parent}
             label="Выбрать категорию"
             onChange={handleParentChange}
+            disabled={blocked}
           >
             {data?.data.map((row) => (
               <MenuItem value={row.id} key={row.id}>

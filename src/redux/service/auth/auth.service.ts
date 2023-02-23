@@ -13,6 +13,10 @@ export class AuthService {
     return axios.get<ILoginResponse>(`${DEV_API}auth/refresh`);
   }
 
+  // static async refresh(): Promise<AxiosResponse<ILoginResponse>> {
+  //   return $api.get<ILoginResponse>(`auth/refresh`);
+  // }
+
   static async logout(): Promise<AxiosResponse<ILoginResponse>> {
     return axios.get(`${DEV_API}auth/logout`);
   }

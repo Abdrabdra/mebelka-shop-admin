@@ -1,11 +1,29 @@
 import { FormControlLabel, Stack, Switch } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTypedSelector } from "../../../../../redux/store";
 import { setAnnounce } from "../../../../../redux/store/reducers/announce/announce.slice";
 
-const AnnounceLiftingMechanism = () => {
+interface Props {
+  prevData?: boolean;
+}
+
+const AnnounceLiftingMechanism: FC<Props> = ({ prevData }) => {
   const dispatch = useDispatch();
-  const [checked, setChecked] = useState(false);
+
+  if (prevData) {
+    dispatch(setAnnounce({ liftingMechanism: prevData }));
+  }
+
+  const selectedValues = useTypedSelector(
+    (state) => state.announce.values.liftingMechanism
+  );
+
+  const [checked, setChecked] = useState(selectedValues);
+
+  useEffect(() => {
+    setChecked(selectedValues);
+  }, [selectedValues]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);

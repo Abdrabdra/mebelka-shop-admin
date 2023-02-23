@@ -1,17 +1,25 @@
 import { Box } from "@mui/material";
 import { FC } from "react";
+import { $image_api } from "../../../../../../api";
 
 interface Props {
-  image: File;
+  image?: File;
+  serverImage?: string;
 }
 
-const PictureOne: FC<Props> = ({ image }) => {
-  const blob = [image];
+const PictureOne: FC<Props> = ({ image, serverImage }) => {
+  const blob = image && [image];
+
+  // console.log("SERVER IMAGE: ", serverImage);
 
   return (
     <Box
       component="img"
-      src={URL.createObjectURL(new Blob(blob, { type: "application/image" }))}
+      src={
+        image
+          ? URL.createObjectURL(new Blob(blob, { type: "application/image" }))
+          : `${$image_api}${serverImage}`
+      }
       sx={{
         width: "150px",
         height: "85px",

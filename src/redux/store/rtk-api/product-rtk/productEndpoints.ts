@@ -1,16 +1,36 @@
+import { IAnnouncementsResponse } from "../../../../types/Announcement/Announcement.type";
+import { IOneAnnouncement } from "../../../../types/Announcement/OneAnnouncement.type";
 import productApi from "./productApi";
 
 export const productEndpoints = productApi.injectEndpoints({
   endpoints: (builder) => ({
-    getProduct: builder.query<any, any>({
-      query: (arg) => ({
-        url: `product`,
-        // params: { parentId: arg?.parentId },
-        method: "GET",
+    getProducts: builder.query<IAnnouncementsResponse, object>({
+      query: (arg) => {
+        return {
+          url: `/product`,
+          params: { ...arg },
+        };
+      },
+      providesTags: ["product"],
+    }),
+
+    getOneProduct: builder.query<IOneAnnouncement, string>({
+      query: (id) => ({
+        url: `/product/${id}`,
       }),
       providesTags: ["product"],
     }),
+
     createProduct: builder.mutation<any, any>({
+      query: (body) => ({
+        url: "product",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["product"],
+    }),
+
+    updateProduct: builder.mutation<any, any>({
       query: (body) => ({
         url: "product",
         method: "POST",
@@ -21,5 +41,9 @@ export const productEndpoints = productApi.injectEndpoints({
   }),
 });
 
-export const { useGetProductQuery, useCreateProductMutation } =
-  productEndpoints;
+export const {
+  useGetProductsQuery,
+  useGetOneProductQuery,
+  useCreateProductMutation,
+  useUpdateProductMutation,
+} = productEndpoints;

@@ -6,15 +6,16 @@ interface IInitState {
   };
   values: {
     file: File[];
+    serverFile: string[];
 
     title: string;
     price: number;
     categoryId?: number;
-    colors: string[];
+    colors: number[];
     length: number;
     width: number;
     height: number;
-    frames: string[];
+    frames: number[];
     decorId?: number;
     liftingMechanism: boolean;
     laundryBoxes: boolean;
@@ -32,6 +33,7 @@ const initialState: IInitState = {
   },
   values: {
     file: [],
+    serverFile: [],
 
     title: "",
     price: 0,

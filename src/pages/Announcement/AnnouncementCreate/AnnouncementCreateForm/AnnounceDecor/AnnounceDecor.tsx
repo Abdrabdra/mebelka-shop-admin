@@ -6,17 +6,35 @@ import {
   SelectChangeEvent,
   Stack,
 } from "@mui/material";
-import { useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTypedSelector } from "../../../../../redux/store";
 import { setAnnounce } from "../../../../../redux/store/reducers/announce/announce.slice";
 import { useGetProductDecorQuery } from "../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
 import { FormTitle } from "../AnnouncementCreateForm";
 
-const AnnounceDecor = () => {
+interface Props {
+  prevData?: number;
+}
+
+const AnnounceDecor: FC<Props> = ({ prevData }) => {
   const dispatch = useDispatch();
   const { data } = useGetProductDecorQuery("");
 
-  const [decor, setDecor] = useState("");
+  if (prevData) {
+    dispatch(setAnnounce({ decorId: prevData }));
+  }
+
+  const selectedValues = useTypedSelector(
+    (state) => state.announce.values.decorId
+  );
+
+  const [decor, setDecor] = useState(String(selectedValues));
+
+  useEffect(() => {
+    setDecor(String(selectedValues));
+  }, [selectedValues]);
+
   const handleChildChange = (event: SelectChangeEvent) => {
     setDecor(event.target.value as string);
 

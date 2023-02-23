@@ -11,19 +11,36 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../../../../redux/store";
 import { setAnnounce } from "../../../../../redux/store/reducers/announce/announce.slice";
 import { useGetProductFrameQuery } from "../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
+import { IFrames } from "../../../../../types/Announcement/OneAnnouncement.type";
 import { FormTitle } from "../AnnouncementCreateForm";
 import { MenuProps } from "./FrameCheckmarks.utils";
 
-const AnnounceFrame = () => {
+interface Props {
+  prevData?: number[];
+}
+
+const AnnounceFrame: FC<Props> = ({ prevData }) => {
   const { data } = useGetProductFrameQuery("");
   const dispatch = useDispatch();
 
-  const [frame, setFrame] = useState<number[]>([]);
+  if (prevData) {
+    dispatch(setAnnounce({ frames: prevData }));
+  }
+
+  const selectedValues = useTypedSelector(
+    (state) => state.announce.values.frames
+  );
+
+  const [frame, setFrame] = useState<number[]>(selectedValues);
+
+  useEffect(() => {
+    setFrame(selectedValues as number[]);
+  }, [selectedValues]);
 
   const handleChange = (event: SelectChangeEvent<typeof frame>) => {
     const {

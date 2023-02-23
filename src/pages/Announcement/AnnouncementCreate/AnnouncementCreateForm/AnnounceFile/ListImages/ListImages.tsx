@@ -7,10 +7,24 @@ import { setAnnounce } from "../../../../../../redux/store/reducers/announce/ann
 
 import PictureOne from "./PictureOne";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { FC } from "react";
 
-const ListImages = () => {
+interface Props {
+  prevData?: string[];
+}
+
+const ListImages: FC<Props> = ({ prevData }) => {
+  console.log(prevData);
+
   const dispatch = useDispatch();
 
+  if (prevData) {
+    dispatch(setAnnounce({ serverFile: prevData }));
+  }
+
+  const selectedServerImages = useTypedSelector(
+    (state) => state.announce.values.serverFile
+  );
   const selectedImages = useTypedSelector(
     (state) => state.announce.values.file
   );
@@ -21,11 +35,42 @@ const ListImages = () => {
     );
   };
 
+  const handleDeleteServerImage = (id: number) => {
+    // query for deleting update image
+  };
+
   return (
     <Stack>
       <Typography>Первое изображение будет Главной</Typography>
 
       <Stack direction="row" spacing={1}>
+        {selectedServerImages.map((row, index) => (
+          <Stack spacing={1} key={index}>
+            <Box sx={{ position: "relative", width: "150px" }}>
+              <IconButton
+                onClick={() => handleDeleteServerImage(index)}
+                sx={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  bottom: "-30px",
+                  width: "30px",
+                  height: "30px",
+                  backgroundColor: "rgba(0, 0, 0, 0.6)",
+                  borderRadius: "5px",
+                  color: "#FF0000",
+                }}
+              >
+                <DeleteOutlineIcon />
+              </IconButton>
+
+              <PictureOne serverImage={selectedServerImages[0]} />
+            </Box>
+          </Stack>
+        ))}
+
         {selectedImages.map((row, index) => (
           <Stack spacing={1} key={index}>
             <Box sx={{ position: "relative", width: "150px" }}>

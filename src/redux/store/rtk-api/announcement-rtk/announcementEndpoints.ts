@@ -2,6 +2,7 @@ import announcementApi from "./announcementApi";
 
 import { IAnnouncementsResponse } from "../../../../types/Announcement/Announcement.type";
 import { Status } from "../../../../types/Enums";
+import { IOneAnnouncement } from "../../../../types/Announcement/OneAnnouncement.type";
 
 export const announcementEndpoints = announcementApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -15,9 +16,9 @@ export const announcementEndpoints = announcementApi.injectEndpoints({
       providesTags: ["announcements"],
     }),
 
-    getOneAnnouncement: builder.query<any, string>({
+    getOneAnnouncement: builder.query<IOneAnnouncement, string>({
       query: (id) => ({
-        url: `/announcement/one/${id}`,
+        url: `/product/${id}`,
       }),
       providesTags: ["announcements"],
     }),
@@ -26,6 +27,15 @@ export const announcementEndpoints = announcementApi.injectEndpoints({
       query: (body) => ({
         url: `/announcement`,
         method: "POST",
+        body,
+      }),
+      invalidatesTags: ["announcements"],
+    }),
+
+    updateAnnouncement: builder.mutation<any, FormData>({
+      query: (body) => ({
+        url: `/announcement`,
+        method: "PUT",
         body,
       }),
       invalidatesTags: ["announcements"],
@@ -49,5 +59,6 @@ export const {
   useGetAnnouncementsQuery,
   useGetOneAnnouncementQuery,
   useCreateAnnouncementMutation,
+  useUpdateAnnouncementMutation,
   useUpdateStatusAnnouncementMutation,
 } = announcementEndpoints;

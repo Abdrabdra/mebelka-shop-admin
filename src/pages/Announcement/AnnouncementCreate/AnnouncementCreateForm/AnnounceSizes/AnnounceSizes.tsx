@@ -1,17 +1,29 @@
 import { Stack } from "@mui/material";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { StyledMainInput } from "../../../../../components/Input/StyledMainInput";
 import { useTypedSelector } from "../../../../../redux/store";
 import { setAnnounce } from "../../../../../redux/store/reducers/announce/announce.slice";
 import { FormTitle } from "../AnnouncementCreateForm";
 
-const AnnounceSizes = () => {
+interface Props {
+  iwidth?: number;
+  iheight?: number;
+  ilength?: number;
+}
+
+const AnnounceSizes: FC<Props> = ({ iwidth, iheight, ilength }) => {
   const dispatch = useDispatch();
 
-  const [length, setLength] = useState(0);
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const selectedValues = useTypedSelector((state) => state.announce.values);
+
+  const [length, setLength] = useState(
+    ilength ? ilength : selectedValues.length
+  );
+  const [width, setWidth] = useState(iwidth ? iwidth : selectedValues.width);
+  const [height, setHeight] = useState(
+    iheight ? iheight : selectedValues.height
+  );
 
   const handleChange = (e: any, type: "length" | "width" | "height") => {
     const { value } = e.target;

@@ -1,10 +1,20 @@
-import { Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { CircularProgress, Stack, Typography } from "@mui/material";
+import { FC, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import MainBaseButton from "../../../../../components/Button/MainBaseButton/MainBaseButton";
 import { useTypedSelector } from "../../../../../redux/store";
-import { useCreateProductMutation } from "../../../../../redux/store/rtk-api/product-rtk/productEndpoints";
+import { announceReset } from "../../../../../redux/store/reducers/announce/announce.slice";
+import {
+  useCreateProductMutation,
+  useUpdateProductMutation,
+} from "../../../../../redux/store/rtk-api/product-rtk/productEndpoints";
 
-const AnnounceConfirmButton = () => {
+interface Props {
+  forUpdate?: boolean;
+}
+
+const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
   const values = useTypedSelector((state) => state.announce.values);
 
   const [isFilled, setIsFilled] = useState(false);
@@ -26,7 +36,25 @@ const AnnounceConfirmButton = () => {
     }
   }, [values]);
 
-  const [create, { isSuccess, isError, error }] = useCreateProductMutation();
+  const [
+    create,
+    {
+      isSuccess: isCreateSuccess,
+      isError: isCreateError,
+      isLoading: isCreateLoading,
+      error: createError,
+    },
+  ] = useCreateProductMutation();
+
+  const [
+    update,
+    {
+      isSuccess: isUpdateSuccess,
+      isError: isUpdateError,
+      isLoading: isUpdateLoading,
+      error: updateError,
+    },
+  ] = useUpdateProductMutation();
 
   const formData = new FormData();
 
@@ -52,33 +80,58 @@ const AnnounceConfirmButton = () => {
   formData.append("discount", String(values.discount));
   formData.append("marketId", String(3));
 
-  const handleClick = () => {
+  const handleCreate = () => {
     create(formData);
   };
+
+  const handleUpdate = () => {
+    update(formData);
+  };
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isUpdateSuccess || isCreateSuccess) {
+      setTimeout(() => {
+        dispatch(announceReset());
+        navigate("/app/announcement/list");
+      }, 3000);
+    }
+  }, [isUpdateSuccess, isCreateSuccess]);
 
   return (
     <Stack>
       <MainBaseButton
-        onClick={handleClick}
+        onClick={forUpdate ? handleUpdate : handleCreate}
         disabled={isFilled ? false : true}
         sx={{ maxWidth: "125px" }}
       >
-        Создать Карточку
+        {forUpdate ? "Обновить Карточку" : "Создать Карточку"}
       </MainBaseButton>
 
       {!isFilled && <Typography>Заполните выше указанные поля!</Typography>}
+      {isCreateLoading ||
+        (isUpdateLoading && (
+          <>
+            <Typography>Загрузка</Typography>
+            <CircularProgress />
+          </>
+        ))}
 
-      {isSuccess && (
-        <Typography sx={{ color: "success.main" }}>
-          Успешно Отправлено!
-        </Typography>
-      )}
+      {isUpdateSuccess ||
+        (isCreateSuccess && (
+          <Typography sx={{ color: "success.main" }}>
+            Успешно Отправлено!
+          </Typography>
+        ))}
 
-      {isError && (
-        <Typography sx={{ color: "error.main" }}>
-          Ошибка при отправке!
-        </Typography>
-      )}
+      {isUpdateError ||
+        (isCreateError && (
+          <Typography sx={{ color: "error.main" }}>
+            Ошибка при отправке!
+          </Typography>
+        ))}
     </Stack>
   );
 };

@@ -50,7 +50,7 @@ const authReducer = createSlice({
       })
       .addCase(refresh.rejected, (state, { payload }) => {
         state.status = ActionsEnum.ERROR;
-        state.isAuth = false;
+        state.isAuth = true;
       });
   },
 });
