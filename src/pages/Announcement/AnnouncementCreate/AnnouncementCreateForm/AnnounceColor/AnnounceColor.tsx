@@ -3,6 +3,7 @@ import {
   Checkbox,
   Divider,
   FormControl,
+  FormGroup,
   InputLabel,
   ListItemText,
   MenuItem,
@@ -14,10 +15,12 @@ import {
 } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { StyledMainInput } from "../../../../../components/Input/StyledMainInput";
 import { useTypedSelector } from "../../../../../redux/store";
 import { setAnnounce } from "../../../../../redux/store/reducers/announce/announce.slice";
 import { useGetProductColorQuery } from "../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
+import { useDeleteProductColorMutation } from "../../../../../redux/store/rtk-api/product-rtk/productEndpoints";
 import { IColors } from "../../../../../types/Announcement/OneAnnouncement.type";
 import { FormTitle } from "../AnnouncementCreateForm";
 import { MenuProps } from "./ColorCheckmarks.utils";
@@ -44,7 +47,7 @@ const AnnounceColor: FC<Props> = ({ prevData }) => {
     setColor(selectedValues as number[]);
   }, [selectedValues]);
 
-  const handleChange = (event: SelectChangeEvent<typeof color>) => {
+  const handleChange = (event: any, child: any) => {
     const {
       target: { value },
     } = event;
@@ -66,7 +69,7 @@ const AnnounceColor: FC<Props> = ({ prevData }) => {
           id="demo-multiple-checkbox"
           multiple
           value={color}
-          onChange={handleChange}
+          onChange={(e, child) => handleChange(e, child)}
           input={<OutlinedInput label="Выберите цвета" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}

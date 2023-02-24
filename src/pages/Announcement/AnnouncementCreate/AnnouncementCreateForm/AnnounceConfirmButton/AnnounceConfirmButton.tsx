@@ -1,7 +1,7 @@
 import { CircularProgress, Stack, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MainBaseButton from "../../../../../components/Button/MainBaseButton/MainBaseButton";
 import { useTypedSelector } from "../../../../../redux/store";
 import { announceReset } from "../../../../../redux/store/reducers/announce/announce.slice";
@@ -84,8 +84,12 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
     create(formData);
   };
 
+  const params = useParams();
+
+  const { announceId } = params;
+
   const handleUpdate = () => {
-    update(formData);
+    announceId && update({ productId: Number(announceId), body: "asd" });
   };
 
   const navigate = useNavigate();

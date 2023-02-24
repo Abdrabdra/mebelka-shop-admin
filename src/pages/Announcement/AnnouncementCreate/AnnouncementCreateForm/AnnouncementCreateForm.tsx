@@ -28,10 +28,6 @@ interface FormProps {
 const AnnouncementCreateForm: FC<FormProps> = ({ forUpdate, updateData }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    dispatch(refresh());
-  }, []);
-
   return (
     <Stack spacing={2.5}>
       <AnnounceFile prevData={updateData?.images} />
