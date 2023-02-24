@@ -71,7 +71,8 @@ export const store = configureStore({
       managementApi.middleware,
       cityApi.middleware,
       announcementApi.middleware,
-      productApi.middleware
+      productApi.middleware,
+      profileApi.middleware
     ),
 });
 

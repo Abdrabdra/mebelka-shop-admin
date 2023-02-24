@@ -32,5 +32,4 @@ export const ProfileImageBox = styled((props: StackProps) => (
   height: "200px",
   backgroundColor: "#E2E2E2",
   borderRadius: "10px",
-  marginBottom: "20px",
 }));

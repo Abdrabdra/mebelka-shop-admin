@@ -36,11 +36,11 @@ export const StyledNewInput = styled(InputBase)(({ theme }) => ({
 export const StyledInput = styled((props: TextFieldProps) => (
   <TextField variant="outlined" fullWidth hiddenLabel {...props} />
 ))(({ theme }) => ({
-  backgroundColor: "#E4FFF9",
+  backgroundColor: "#f4f4f4",
   borderRadius: "5px",
 
   "& fieldset": {
-    borderColor: "#E4FFF9",
+    // borderColor: "#000",
     outline: "none",
     "&:focus": {
       outline: "none",

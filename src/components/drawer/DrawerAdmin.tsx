@@ -78,7 +78,7 @@ const DrawerAdmin = () => {
     >
       <Stack>
         <NavLink
-          to="/app/home"
+          to="/"
           style={{ textDecoration: "none", color: "#000", fontSize: "27px" }}
         >
           <Toolbar sx={{ justifyContent: "center", mt: "23px", mb: "23px" }}>
