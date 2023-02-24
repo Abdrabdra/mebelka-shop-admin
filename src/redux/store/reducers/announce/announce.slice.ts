@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IImages } from "../../../../types/Announcement/OneAnnouncement.type";
 
 interface IInitState {
   isSelected: {
@@ -6,7 +7,7 @@ interface IInitState {
   };
   values: {
     file: File[];
-    serverFile: string[];
+    serverFile: IImages[];
 
     title: string;
     price: number;

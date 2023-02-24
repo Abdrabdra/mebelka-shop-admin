@@ -38,6 +38,14 @@ export const productEndpoints = productApi.injectEndpoints({
       }),
       invalidatesTags: ["product"],
     }),
+
+    deleteProductPhoto: builder.mutation<any, any>({
+      query: (arg) => ({
+        url: `product/photo/${arg}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["product"],
+    }),
   }),
 });
 
@@ -46,4 +54,5 @@ export const {
   useGetOneProductQuery,
   useCreateProductMutation,
   useUpdateProductMutation,
+  useDeleteProductPhotoMutation,
 } = productEndpoints;

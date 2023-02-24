@@ -8,14 +8,14 @@ import { setAnnounce } from "../../../../../../redux/store/reducers/announce/ann
 import PictureOne from "./PictureOne";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { FC } from "react";
+import { useDeleteProductPhotoMutation } from "../../../../../../redux/store/rtk-api/product-rtk/productEndpoints";
+import { IImages } from "../../../../../../types/Announcement/OneAnnouncement.type";
 
 interface Props {
-  prevData?: string[];
+  prevData?: IImages[];
 }
 
 const ListImages: FC<Props> = ({ prevData }) => {
-  console.log(prevData);
-
   const dispatch = useDispatch();
 
   if (prevData) {
@@ -35,8 +35,11 @@ const ListImages: FC<Props> = ({ prevData }) => {
     );
   };
 
+  const [deletePhoto] = useDeleteProductPhotoMutation();
+
   const handleDeleteServerImage = (id: number) => {
     // query for deleting update image
+    deletePhoto(id);
   };
 
   return (
@@ -48,7 +51,7 @@ const ListImages: FC<Props> = ({ prevData }) => {
           <Stack spacing={1} key={index}>
             <Box sx={{ position: "relative", width: "150px" }}>
               <IconButton
-                onClick={() => handleDeleteServerImage(index)}
+                onClick={() => handleDeleteServerImage(row.id)}
                 sx={{
                   position: "absolute",
                   left: 0,
@@ -66,7 +69,7 @@ const ListImages: FC<Props> = ({ prevData }) => {
                 <DeleteOutlineIcon />
               </IconButton>
 
-              <PictureOne serverImage={selectedServerImages[0]} />
+              <PictureOne serverImage={row.imageUrl} />
             </Box>
           </Stack>
         ))}

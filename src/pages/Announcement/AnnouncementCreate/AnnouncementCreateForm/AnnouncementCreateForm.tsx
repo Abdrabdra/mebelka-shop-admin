@@ -48,7 +48,7 @@ const AnnouncementCreateForm: FC<FormProps> = ({ forUpdate, updateData }) => {
         iwidth={updateData?.info.width}
       />
       <AnnounceFrame prevData={updateData?.info.frames.map((row) => row.id)} />
-      <AnnounceDecor prevData={updateData?.info.id} />
+      <AnnounceDecor prevData={updateData?.info.decor.id} />
       <AnnounceLiftingMechanism prevData={updateData?.info.liftingMechanism} />
       <AnnounceLaundryBoxes prevData={updateData?.info.laundryBoxes} />
 

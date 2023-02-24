@@ -10,14 +10,12 @@ interface Props {
 }
 
 const AnnounceFile: FC<Props> = ({ prevData }) => {
-  console.log(prevData);
-  
   return (
     <Stack spacing={1}>
       <FormTitle title="Фото" />
       <Stack direction="row" spacing={3} alignItems="center">
         <UploadFile />
-        <ListImages prevData={prevData?.map((row) => row.imageUrl)} />
+        <ListImages prevData={prevData} />
       </Stack>
     </Stack>
   );
