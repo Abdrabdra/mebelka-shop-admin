@@ -16,7 +16,11 @@ const ChooseIsPhoto: FC<Props> = ({ handleChangeQuery }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
 
-    handleChangeQuery({ photo: event.target.checked });
+    if (event.target.checked) {
+      handleChangeQuery({ photo: event.target.checked });
+    } else {
+      handleChangeQuery({ photo: undefined });
+    }
   };
 
   return (

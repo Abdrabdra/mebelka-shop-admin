@@ -16,7 +16,11 @@ const ChooseIsDiscount: FC<Props> = ({ handleChangeQuery }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
 
-    handleChangeQuery({ discount: event.target.checked });
+    if (event.target.checked) {
+      handleChangeQuery({ discount: event.target.checked });
+    } else {
+      handleChangeQuery({ discount: undefined });
+    }
   };
 
   return (

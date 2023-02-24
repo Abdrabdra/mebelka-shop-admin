@@ -7,7 +7,11 @@ import ChooseMark from "./ChooseMark";
 import ChooseYear from "./ChooseYear";
 import ChoosePrice from "./ChoosePrice";
 import { useTypedSelector } from "../../../../../redux/store";
-import { setFilterProduct } from "../../../../../redux/store/reducers/filter/filterProduct/filterProduct.slice";
+import {
+  setFilterProduct,
+  setFilterProductHelper,
+  setFilterProductReset,
+} from "../../../../../redux/store/reducers/filter/filterProduct/filterProduct.slice";
 import AbsoluteBox from "../../../AbsoluteBox";
 import { MainButton } from "../../../../Button/MainBaseButton";
 import ChooseIsPhoto from "./ChooseIsPhoto";
@@ -23,18 +27,8 @@ const ProductFilterContent: FC<Props> = ({ handleClose }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const selectedMarks = useTypedSelector((state) => state.filterProduct.values);
-
   const [filterValues, setFilterValues] = useState({
     colors: [],
-
-    // photo: undefined,
-    // discount: null,
-    // cityId: null,
-    // categoryId: null,
-
-    // priceFrom: "",
-    // priceTo: "",
   });
 
   const handleChangeQuery = (value: object) => {

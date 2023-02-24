@@ -9,6 +9,7 @@ interface IInitState {
 
   helper: {
     reset: boolean;
+    parentCategoryId?: number;
   };
 
   values: {
@@ -31,6 +32,7 @@ interface IInitState {
 const initialState: IInitState = {
   helper: {
     reset: true,
+    parentCategoryId: undefined,
   },
 
   values: {
@@ -54,16 +56,23 @@ const filterPorductSlice = createSlice({
   name: "filterPorducts",
   initialState,
   reducers: {
+    setFilterProductHelper: (state, { payload }) => {
+      state.helper = { ...state.helper, ...payload };
+    },
     setFilterProduct: (state, { payload }) => {
       state.values = { ...state.values, ...payload };
     },
     setFilterProductReset: (state) => {
       state.values = initialState.values;
+      state.helper = initialState.helper;
     },
   },
 });
 
-export const { setFilterProduct, setFilterProductReset } =
-  filterPorductSlice.actions;
+export const {
+  setFilterProductHelper,
+  setFilterProduct,
+  setFilterProductReset,
+} = filterPorductSlice.actions;
 
 export default filterPorductSlice.reducer;

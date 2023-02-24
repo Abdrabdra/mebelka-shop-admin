@@ -8,10 +8,11 @@ import {
 } from "@mui/material";
 import { FC, useState } from "react";
 import { FormTitle } from "../../../../../../../pages/Announcement/AnnouncementCreate/AnnouncementCreateForm/AnnouncementCreateForm";
+import { useTypedSelector } from "../../../../../../../redux/store";
 import { useGetCategoryQuery } from "../../../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
 
 interface Props {
-  parentId: string | number;
+  parentId?: string | number;
   handleChangeQuery: (value: any) => void;
 }
 
@@ -21,7 +22,11 @@ const ChildCategory: FC<Props> = ({ parentId, handleChangeQuery }) => {
     { skip: parentId ? false : true }
   );
 
-  const [child, setChild] = useState("");
+  const selectedValue = useTypedSelector(
+    (state) => state.filterProduct.values.categoryId
+  );
+
+  const [child, setChild] = useState(String(selectedValue));
   const handleChildChange = (event: SelectChangeEvent) => {
     setChild(event.target.value as string);
 

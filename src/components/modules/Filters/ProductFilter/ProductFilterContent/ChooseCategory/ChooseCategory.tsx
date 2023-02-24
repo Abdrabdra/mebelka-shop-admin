@@ -7,7 +7,10 @@ import {
   Stack,
 } from "@mui/material";
 import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
 import { FormTitle } from "../../../../../../pages/Announcement/AnnouncementCreate/AnnouncementCreateForm/AnnouncementCreateForm";
+import { useTypedSelector } from "../../../../../../redux/store";
+import { setFilterProductHelper } from "../../../../../../redux/store/reducers/filter/filterProduct/filterProduct.slice";
 import { useGetCategoryQuery } from "../../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
 import ChildCategory from "./ChildCategory";
 
@@ -16,11 +19,18 @@ interface Props {
 }
 
 const ChooseCategory: FC<Props> = ({ handleChangeQuery }) => {
+  const dispatch = useDispatch();
   const { data } = useGetCategoryQuery("");
 
-  const [parent, setParent] = useState("");
-  const handleParentChange = (event: SelectChangeEvent) => {
-    setParent(event.target.value as string);
+  const selectedValue = useTypedSelector(
+    (state) => state.filterProduct.helper.parentCategoryId
+  );
+
+  const [parent, setParent] = useState(selectedValue);
+  const handleParentChange = (event: any) => {
+    setParent(event.target.value as number);
+
+    dispatch(setFilterProductHelper({ parentCategoryId: event.target.value }));
   };
 
   return (
