@@ -3,7 +3,9 @@ import MainBaseButton from "../../../../components/Button/MainBaseButton/MainBas
 import { StyledMainInput } from "../../../../components/Input/StyledMainInput";
 import SearchIcon from "@mui/icons-material/Search";
 
-const AnnouncementFilter = () => {
+import { ProductFilterButton } from "../../../../components/modules/Filters/ProductFilter";
+
+const FilterBox = () => {
   return (
     <Stack
       direction="row"
@@ -24,14 +26,10 @@ const AnnouncementFilter = () => {
         }}
         bgcolor="primary.light"
       />
-      <MainBaseButton
-        bgcolor="primary.light"
-        sx={{ width: "220px", color: "#000" }}
-      >
-        Фильтры
-      </MainBaseButton>
+
+      <ProductFilterButton />
     </Stack>
   );
 };
 
-export default AnnouncementFilter;
+export default FilterBox;

@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import { useNavigate, useRoutes } from "react-router-dom";
 import MainBaseButton from "../../../components/Button/MainBaseButton/MainBaseButton";
 import { MainButton } from "../../../components/styled-components/StyledButton";
-import AnnouncementFilter from "./AnnouncementFilter";
+import FilterBox from "./FilterBox";
 import ContentList from "./ContentList";
 
 const AnnouncementList = () => {
@@ -22,7 +22,8 @@ const AnnouncementList = () => {
           Создать Товар
         </MainButton>
       </Stack>
-      <AnnouncementFilter />
+
+      <FilterBox />
       <ContentList />
     </Stack>
   );

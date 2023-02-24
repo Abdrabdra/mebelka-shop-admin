@@ -1,11 +1,11 @@
 import { Stack } from "@mui/material";
-import AnnouncementFilter from "./AnnouncementFilter";
 import ContentList from "./ContentList";
+import FilterBox from "./FilterBox";
 
 const OrderList = () => {
   return (
     <Stack>
-      <AnnouncementFilter />
+      <FilterBox />
       <ContentList />
     </Stack>
   );

@@ -29,8 +29,6 @@ const ContentList: FC<Props> = ({ withoutPagination }) => {
     }
   );
 
-  console.log(data)
-
   return (
     <Stack spacing={1.5}>
       {isLoading || isFetching ? (

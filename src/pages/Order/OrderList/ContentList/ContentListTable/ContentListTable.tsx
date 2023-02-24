@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
+import { $image_api } from "../../../../../api";
 import MainBaseButton from "../../../../../components/Button/MainBaseButton/MainBaseButton";
 import ChipStatus from "../../../../../components/Chip/ChipStatus";
 import {
@@ -20,13 +21,13 @@ import {
   StyledHeadRow,
   TableDivider,
 } from "../../../../../components/Table/TableRounded/TableRounded.module";
-
+import { IAnnouncement } from "../../../../../types/Announcement/Announcement.type";
 import numberWithSpaces from "../../../../../utils/numberWithSpaces";
 
-const tableHead = ["Объявление", "Статус", "Категория"];
+const tableHead = ["Название", "Артикул", "Категория"];
 
 interface Props {
-  tableData: any;
+  tableData: IAnnouncement[];
 }
 
 const ContentListTable: FC<Props> = ({ tableData }) => {
@@ -52,7 +53,7 @@ const ContentListTable: FC<Props> = ({ tableData }) => {
         </TableHead>
 
         <TableBody>
-          {/* {tableData.map((row) => (
+          {tableData.map((row) => (
             <StyledBodyRow key={row.id}>
               <StyledBodyCellFirst>
                 <Stack direction="row" spacing={1}>
@@ -64,18 +65,31 @@ const ContentListTable: FC<Props> = ({ tableData }) => {
                       width: "60px",
                       height: "60px",
                     }}
-                  ></Box>
+                  >
+                    {row?.images[0]?.imageUrl && (
+                      <img
+                        src={`${$image_api}/${row.images[0].imageUrl}`}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: "10px",
+                        }}
+                      />
+                    )}
+                  </Box>
                   <Stack justifyContent={"center"}>
-                    <Typography variant="h6" sx={{ color: "#2DC36A" }}>
+                    <Typography>{row.title}</Typography>
+                    <Typography variant="h6" sx={{ color: "primary.main" }}>
                       {`${numberWithSpaces(row.price)} KZT`}
                     </Typography>
                   </Stack>
                 </Stack>
               </StyledBodyCellFirst>
-              <StyledBodyCell>
-                <ChipStatus status={row.status} />
-              </StyledBodyCell>
+
+              <StyledBodyCell>{row.id}</StyledBodyCell>
+
               <StyledBodyCell>Мебель</StyledBodyCell>
+
               <StyledBodyCellLast>
                 <MainBaseButton
                   onClick={() => handleNavigate(row.id)}
@@ -86,7 +100,7 @@ const ContentListTable: FC<Props> = ({ tableData }) => {
                 </MainBaseButton>
               </StyledBodyCellLast>
             </StyledBodyRow>
-          ))} */}
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

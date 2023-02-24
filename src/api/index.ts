@@ -16,6 +16,7 @@ $api.interceptors.request.use((config) => {
     config.headers.authorization = `Bearer ${localStorage.getItem(
       "access_token"
     )}`;
+
     return config;
   }
 });
@@ -27,11 +28,12 @@ $api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     if (
-      error.response.status == 401 &&
-      error.config &&
+      error.response.status == 401 ||
+      error.config ||
       !error.config._isRetry
     ) {
       originalRequest._isRetry = true;
+
       try {
         const response = await AuthService.refresh();
         localStorage.setItem("access_token", response.data.access_token);
@@ -40,6 +42,7 @@ $api.interceptors.response.use(
         console.log("Пользователь не авторизован");
       }
     }
+
     throw error;
   }
 );

@@ -11,8 +11,21 @@ interface Props {
 
 const ContentListPagination: FC<Props> = ({ count }) => {
   const dispatch = useDispatch();
-  const totalPages = Math.ceil(count / 5);
-  const selectedPage = useTypedSelector((state) => state.filterProduct.values.page);
+
+  const selectedLimit = useTypedSelector(
+    (state) => state.filterProduct.values.limit
+  );
+  const selectedPage = useTypedSelector(
+    (state) => state.filterProduct.values.page
+  );
+
+    console.log()
+
+  const totalPages = Math.ceil(count / selectedLimit);
+
+  console.log("count: ", count);
+  console.log("totalPages: ", totalPages);
+  console.log("selectedPage: ", selectedPage);
 
   const [page, setPage] = useState(selectedPage);
   const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {
