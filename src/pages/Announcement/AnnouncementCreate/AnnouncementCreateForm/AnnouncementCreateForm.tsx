@@ -37,7 +37,10 @@ const AnnouncementCreateForm: FC<FormProps> = ({ forUpdate, updateData }) => {
       <AnnouncePrice prevData={updateData?.price} />
       <AnnounceDiscount prevData={updateData?.discount} />
       <AnnounceCategory blocked={forUpdate ? true : false} />
-      <AnnounceColor prevData={updateData?.colors.map((row) => row.id)} />
+      <AnnounceColor
+        forUpdate={forUpdate}
+        prevData={updateData?.colors.map((row) => row.id)}
+      />
       <AnnounceSizes
         iheight={updateData?.info.height}
         ilength={updateData?.info.length}

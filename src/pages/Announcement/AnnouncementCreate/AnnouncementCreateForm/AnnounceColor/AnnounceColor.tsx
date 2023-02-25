@@ -24,12 +24,14 @@ import { useDeleteProductColorMutation } from "../../../../../redux/store/rtk-ap
 import { IColors } from "../../../../../types/Announcement/OneAnnouncement.type";
 import { FormTitle } from "../AnnouncementCreateForm";
 import { MenuProps } from "./ColorCheckmarks.utils";
+import DeleteColors from "./DeleteColors";
 
 interface Props {
   prevData?: number[];
+  forUpdate?: boolean;
 }
 
-const AnnounceColor: FC<Props> = ({ prevData }) => {
+const AnnounceColor: FC<Props> = ({ prevData, forUpdate }) => {
   const { data } = useGetProductColorQuery("");
   const dispatch = useDispatch();
 
@@ -57,8 +59,10 @@ const AnnounceColor: FC<Props> = ({ prevData }) => {
   };
 
   return (
-    <Stack spacing={1}>
+    <Stack spacing={2}>
       <FormTitle title="Цвет" />
+
+      {forUpdate && prevData && <DeleteColors prevData={prevData} />}
 
       <FormControl fullWidth>
         <InputLabel id="demo-multiple-checkbox-label">
