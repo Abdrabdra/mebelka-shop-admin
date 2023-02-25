@@ -38,6 +38,7 @@ const AnnouncementCreateForm: FC<FormProps> = ({ forUpdate, updateData }) => {
       <AnnounceDiscount prevData={updateData?.discount} />
       <AnnounceCategory blocked={forUpdate ? true : false} />
       <AnnounceColor
+        untouchedData={updateData?.colors}
         forUpdate={forUpdate}
         prevData={updateData?.colors.map((row) => row.id)}
       />
@@ -46,7 +47,11 @@ const AnnouncementCreateForm: FC<FormProps> = ({ forUpdate, updateData }) => {
         ilength={updateData?.info.length}
         iwidth={updateData?.info.width}
       />
-      <AnnounceFrame prevData={updateData?.info.frames.map((row) => row.id)} />
+      <AnnounceFrame
+        untouchedData={updateData?.info.frames}
+        forUpdate={forUpdate}
+        prevData={updateData?.info.frames.map((row) => row.id)}
+      />
       <AnnounceDecor prevData={updateData?.info.decor.id} />
       <AnnounceLiftingMechanism prevData={updateData?.info.liftingMechanism} />
       <AnnounceLaundryBoxes prevData={updateData?.info.laundryBoxes} />

@@ -18,7 +18,10 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { StyledMainInput } from "../../../../../components/Input/StyledMainInput";
 import { useTypedSelector } from "../../../../../redux/store";
-import { setAnnounce } from "../../../../../redux/store/reducers/announce/announce.slice";
+import {
+  setAnnounce,
+  setAnnounceColor,
+} from "../../../../../redux/store/reducers/announce/announce.slice";
 import { useGetProductColorQuery } from "../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
 import { useDeleteProductColorMutation } from "../../../../../redux/store/rtk-api/product-rtk/productEndpoints";
 import { IColors } from "../../../../../types/Announcement/OneAnnouncement.type";
@@ -29,15 +32,17 @@ import DeleteColors from "./DeleteColors";
 interface Props {
   prevData?: number[];
   forUpdate?: boolean;
+  untouchedData?: IColors[];
 }
 
 const AnnounceColor: FC<Props> = ({ prevData, forUpdate }) => {
   const { data } = useGetProductColorQuery("");
   const dispatch = useDispatch();
 
-  if (prevData) {
+  useEffect(() => {
+    console.log("TEST!");
     dispatch(setAnnounce({ colors: prevData }));
-  }
+  }, [prevData]);
 
   const selectedValues = useTypedSelector(
     (state) => state.announce.values.colors
@@ -54,15 +59,33 @@ const AnnounceColor: FC<Props> = ({ prevData, forUpdate }) => {
       target: { value },
     } = event;
 
-    setColor(value as number[]);
-    dispatch(setAnnounce({ colors: value }));
+    if (forUpdate) {
+      const selected = color.filter((row) => row === child.props.value);
+
+      if (
+        prevData &&
+        prevData.filter((row) => row === selected[0]).length > 0
+      ) {
+        console.log("Удалите объекты выше");
+      } else {
+        setColor(value as number[]);
+        dispatch(setAnnounce({ colors: value }));
+      }
+    } else {
+      console.log("ВТОРАЯ");
+
+      setColor(value as number[]);
+      dispatch(setAnnounce({ colors: value }));
+    }
   };
 
   return (
     <Stack spacing={2}>
       <FormTitle title="Цвет" />
 
-      {forUpdate && prevData && <DeleteColors prevData={prevData} />}
+      {forUpdate && prevData && prevData.length > 0 && (
+        <DeleteColors prevData={prevData} />
+      )}
 
       <FormControl fullWidth>
         <InputLabel id="demo-multiple-checkbox-label">

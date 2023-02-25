@@ -21,11 +21,11 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
 
   useEffect(() => {
     if (
-      values.file.length > 0 &&
+      (values.file.length > 0 || values.serverFile.length > 0) &&
       values.title &&
       values.production &&
       values.cityId &&
-      values.categoryId &&
+      (forUpdate ? !values.categoryId : values.categoryId) &&
       values.colors.length > 0 &&
       values.frames.length > 0 &&
       values.decorId
@@ -35,6 +35,9 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
       setIsFilled(false);
     }
   }, [values]);
+
+  console.log("colors: ", values.colors);
+  console.log("frames: ", values.frames);
 
   const [
     create,
@@ -89,7 +92,25 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
   const { announceId } = params;
 
   const handleUpdate = () => {
-    announceId && update({ productId: Number(announceId), body: "asd" });
+    announceId &&
+      update({
+        productId: Number(announceId),
+        body: {
+          cityId: values.cityId,
+          colors: values.colors.join(","),
+          decorId: values.decorId,
+          discount: values.discount,
+          frames: values.frames.join(","),
+          height: Number(values.height),
+          length: Number(values.length),
+          width: Number(values.width),
+          laundryBoxes: values.laundryBoxes,
+          liftingMechanism: values.liftingMechanism,
+          price: values.price,
+          production: values.production,
+          title: values.title,
+        },
+      });
   };
 
   const navigate = useNavigate();

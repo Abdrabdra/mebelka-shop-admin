@@ -1,4 +1,7 @@
-import { IAnnouncementsResponse } from "../../../../types/Announcement/Announcement.type";
+import {
+  IAnnouncementsResponse,
+  IUpdateProduct,
+} from "../../../../types/Announcement/Announcement.type";
 import { IOneAnnouncement } from "../../../../types/Announcement/OneAnnouncement.type";
 import productApi from "./productApi";
 
@@ -30,7 +33,10 @@ export const productEndpoints = productApi.injectEndpoints({
       invalidatesTags: ["product"],
     }),
 
-    updateProduct: builder.mutation<any, { productId: number; body: any }>({
+    updateProduct: builder.mutation<
+      any,
+      { productId: number; body: IUpdateProduct }
+    >({
       query: (arg) => ({
         url: `product/${arg.productId}`,
         method: "PUT",
@@ -57,6 +63,16 @@ export const productEndpoints = productApi.injectEndpoints({
       }),
       invalidatesTags: ["product"],
     }),
+    deleteProductFrame: builder.mutation<
+      any,
+      { frameId: number; productId: number }
+    >({
+      query: (arg) => ({
+        url: `product/frame/${arg.frameId}/product/${arg.productId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["product"],
+    }),
   }),
 });
 
@@ -65,6 +81,8 @@ export const {
   useGetOneProductQuery,
   useCreateProductMutation,
   useUpdateProductMutation,
+
   useDeleteProductPhotoMutation,
   useDeleteProductColorMutation,
+  useDeleteProductFrameMutation,
 } = productEndpoints;

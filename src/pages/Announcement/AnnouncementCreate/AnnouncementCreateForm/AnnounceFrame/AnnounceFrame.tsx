@@ -18,19 +18,22 @@ import { setAnnounce } from "../../../../../redux/store/reducers/announce/announ
 import { useGetProductFrameQuery } from "../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
 import { IFrames } from "../../../../../types/Announcement/OneAnnouncement.type";
 import { FormTitle } from "../AnnouncementCreateForm";
+import DeleteFrame from "./DeleteFrame";
 import { MenuProps } from "./FrameCheckmarks.utils";
 
 interface Props {
   prevData?: number[];
+  forUpdate?: boolean;
+  untouchedData?: IFrames[];
 }
 
-const AnnounceFrame: FC<Props> = ({ prevData }) => {
+const AnnounceFrame: FC<Props> = ({ prevData, forUpdate, untouchedData }) => {
   const { data } = useGetProductFrameQuery("");
   const dispatch = useDispatch();
 
-  if (prevData) {
+  useEffect(() => {
     dispatch(setAnnounce({ frames: prevData }));
-  }
+  }, [prevData]);
 
   const selectedValues = useTypedSelector(
     (state) => state.announce.values.frames
@@ -42,17 +45,36 @@ const AnnounceFrame: FC<Props> = ({ prevData }) => {
     setFrame(selectedValues as number[]);
   }, [selectedValues]);
 
-  const handleChange = (event: SelectChangeEvent<typeof frame>) => {
+  const handleChange = (event: SelectChangeEvent<typeof frame>, child: any) => {
     const {
       target: { value },
     } = event;
-    setFrame(value as number[]);
-    dispatch(setAnnounce({ frames: value }));
+
+    if (forUpdate) {
+      const selected = frame.filter((row) => row === child.props.value);
+
+      if (
+        prevData &&
+        prevData.filter((row) => row === selected[0]).length > 0
+      ) {
+        console.log("Удалите объекты выше");
+      } else {
+        setFrame(value as number[]);
+        dispatch(setAnnounce({ frames: value }));
+      }
+    } else {
+      setFrame(value as number[]);
+      dispatch(setAnnounce({ frames: value }));
+    }
   };
 
   return (
-    <Stack spacing={1}>
+    <Stack spacing={2}>
       <FormTitle title="Каркас" />
+
+      {forUpdate && untouchedData && untouchedData.length > 0 && (
+        <DeleteFrame untouchedData={untouchedData} />
+      )}
 
       <FormControl fullWidth>
         <InputLabel id="demo-multiple-checkbox-label">
@@ -63,7 +85,7 @@ const AnnounceFrame: FC<Props> = ({ prevData }) => {
           id="demo-multiple-checkbox"
           multiple
           value={frame}
-          onChange={handleChange}
+          onChange={(e, child) => handleChange(e, child)}
           input={<OutlinedInput label="Выберите каркас" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}

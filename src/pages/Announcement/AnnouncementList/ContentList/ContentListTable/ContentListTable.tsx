@@ -93,10 +93,10 @@ const ContentListTable: FC<Props> = ({ tableData }) => {
               <StyledBodyCellLast>
                 <MainBaseButton
                   onClick={() => handleNavigate(row.id)}
-                  bgcolor="#2DC36A"
+                  bgcolor="primary.main"
                   sx={{ height: "40px", maxWidth: "180px" }}
                 >
-                  Подробнее
+                  Редактировать
                 </MainBaseButton>
               </StyledBodyCellLast>
             </StyledBodyRow>

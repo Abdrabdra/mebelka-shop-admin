@@ -18,16 +18,10 @@ const DeleteColors: FC<Props> = ({ prevData }) => {
   const { data } = useGetProductColorQuery("");
   const [deleteColor] = useDeleteProductColorMutation();
 
-  console.log("prevData: ", prevData);
-
   const testValues =
     data && prevData.map((prevRow) => data.filter((row) => row.id === prevRow));
 
-  console.log("testValues: ", testValues);
-
   const sdf = testValues?.map((row) => row[0]);
-
-  console.log("sdf: ", sdf);
 
   const handleDelete = (id: number) => {
     announceId && deleteColor({ productId: Number(announceId), colorId: id });
@@ -35,7 +29,7 @@ const DeleteColors: FC<Props> = ({ prevData }) => {
 
   return (
     <Stack spacing={1}>
-      <Typography>Удалить Выбранные Цвета</Typography>
+      <Typography>Удалить Выбранный Цвет</Typography>
 
       <Stack
         sx={{
@@ -45,26 +39,26 @@ const DeleteColors: FC<Props> = ({ prevData }) => {
           borderRadius: "15px",
         }}
       >
-        {testValues &&
-          testValues.map((row) => (
+        {sdf &&
+          sdf.map((row) => (
             <Stack
               direction={"row"}
               justifyContent="space-between"
               alignItems="center"
-              key={row[0].id}
+              key={row.id}
             >
               <Stack direction={"row"} spacing={1} alignItems="center">
                 <Box
                   sx={{
-                    backgroundColor: row[0].value,
+                    backgroundColor: row.value,
                     width: "15px",
                     height: "15px",
                     border: "1px solid #000",
                   }}
                 />
-                <Typography>{row[0].title}</Typography>
+                <Typography>{row.title}</Typography>
               </Stack>
-              <IconButton onClick={() => handleDelete(row[0].id)}>
+              <IconButton onClick={() => handleDelete(row.id)}>
                 <CloseIcon />
               </IconButton>
             </Stack>

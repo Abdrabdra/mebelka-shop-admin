@@ -13,13 +13,18 @@ const AnnouncementList = () => {
   };
 
   return (
-    <Stack>
+    <Stack spacing={3}>
       <Stack direction="row" justifyContent={"end"}>
         <MainButton
           onClick={handleClick}
-          sx={{ width: "200px", backgroundColor: "primary.main", mb: "20px" }}
+          sx={{
+            backgroundColor: "primary.main",
+            width: "275px",
+            fontSize: "18px",
+            fontWeight: 600,
+          }}
         >
-          Создать Товар
+          Добавить новый товар
         </MainButton>
       </Stack>
 

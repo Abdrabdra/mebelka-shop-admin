@@ -63,7 +63,11 @@ const announceSlice = createSlice({
       state.isSelected = { ...state.isSelected, ...payload };
     },
     setAnnounce: (state, { payload }) => {
+      console.log(payload);
       state.values = { ...state.values, ...payload };
+    },
+    setAnnounceColor: (state, { payload }) => {
+      state.values.colors = payload.arr;
     },
 
     announceReset: (state) => {
@@ -72,7 +76,7 @@ const announceSlice = createSlice({
   },
 });
 
-export const { setIsSelected, setAnnounce, announceReset } =
+export const { setIsSelected, setAnnounce, setAnnounceColor, announceReset } =
   announceSlice.actions;
 
 export default announceSlice.reducer;
