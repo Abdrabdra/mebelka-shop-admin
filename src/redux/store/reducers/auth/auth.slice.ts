@@ -18,8 +18,10 @@ const authReducer = createSlice({
   name: "auth",
   reducers: {
     setStatus: (state, { payload }) => {
-      //debugger
       state.status = payload;
+    },
+    setAuth: (state, { payload }) => {
+      state.isAuth = payload;
     },
   },
   initialState,
@@ -55,6 +57,6 @@ const authReducer = createSlice({
   },
 });
 
-export const { setStatus } = authReducer.actions;
+export const { setAuth, setStatus } = authReducer.actions;
 
 export default authReducer.reducer;
