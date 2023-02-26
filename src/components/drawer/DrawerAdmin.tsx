@@ -26,13 +26,16 @@ import {
 
 // store
 import { logout } from "../../redux/store/reducers/auth/auth.action";
-import { useTypedSelector } from "../../redux/store";
+import { AppDispatch, useTypedSelector } from "../../redux/store";
 
 import Inventory2RoundedIcon from "@mui/icons-material/Inventory2Rounded";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import StoreRoundedIcon from "@mui/icons-material/StoreRounded";
+import { $api } from "../../api";
+import { baseQuery } from "../../redux/store/rtk-api/rtkApi";
+import profileApi from "../../redux/store/rtk-api/profile-rtk/profileApi";
 
 const links = [
   {
@@ -53,9 +56,15 @@ const links = [
 ];
 
 const DrawerAdmin = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const role = useTypedSelector((state) => state.user.role);
+
+  const handleLogOut = async () => {
+    dispatch(profileApi.util.resetApiState());
+    await dispatch(logout());
+    window.location.reload();
+  };
 
   return (
     <Drawer
@@ -106,10 +115,7 @@ const DrawerAdmin = () => {
       <Stack>
         <List>
           <StyledNavLink to="management">
-            <StyledListItem
-              // @ts-ignore
-              onClick={() => dispatch(logout())}
-            >
+            <StyledListItem>
               <StyledListItemIcon>
                 <Icon component={SettingsOutlinedIcon} />
               </StyledListItemIcon>
@@ -118,8 +124,7 @@ const DrawerAdmin = () => {
           </StyledNavLink>
           <StyledNavLink to="">
             <StyledListItem
-              // @ts-ignore
-              onClick={() => dispatch(logout())}
+              onClick={handleLogOut}
               sx={{ color: "#F18989", mb: "35px" }}
             >
               <StyledListItemIcon>

@@ -13,6 +13,10 @@ export class AuthService {
     return axios.get<ILoginResponse>(`${DEV_API}auth/refresh`);
   }
 
+  static async profileMe(): Promise<AxiosResponse<any>> {
+    return $api.get<any>(`profile/me`);
+  }
+
   // static async refresh(): Promise<AxiosResponse<ILoginResponse>> {
   //   return $api.get<ILoginResponse>(`auth/refresh`);
   // }

@@ -1,4 +1,9 @@
-import { IProfile, IProfileUpdate } from "./profile.type";
+import {
+  IMarket,
+  IMarketUpdate,
+  IProfile,
+  IProfileUpdate,
+} from "./profile.type";
 import profileApi from "./profileApi";
 
 export const profileEndpoints = profileApi.injectEndpoints({
@@ -10,6 +15,7 @@ export const profileEndpoints = profileApi.injectEndpoints({
       }),
       providesTags: ["profile"],
     }),
+
     updateProfile: builder.mutation<IProfileUpdate, any>({
       query: (body) => ({
         url: `profile`,
@@ -23,8 +29,34 @@ export const profileEndpoints = profileApi.injectEndpoints({
       }),
       invalidatesTags: ["profile"],
     }),
+
+    getMyMarket: builder.query<IMarket, { userId: number }>({
+      query: (arg) => ({
+        url: `market`,
+        method: "GET",
+        params: arg,
+      }),
+      providesTags: ["market"],
+    }),
+    updateMarket: builder.mutation<
+      string,
+      { marketId: number | string; body: IMarketUpdate }
+    >({
+      query: (arg) => ({
+        url: `market/${arg.marketId}`,
+        method: "PUT",
+        body: {
+          ...arg.body,
+        },
+      }),
+      invalidatesTags: ["market"],
+    }),
   }),
 });
 
-export const { useGetMyProfileQuery, useUpdateProfileMutation } =
-  profileEndpoints;
+export const {
+  useGetMyProfileQuery,
+  useUpdateProfileMutation,
+  useGetMyMarketQuery,
+  useUpdateMarketMutation,
+} = profileEndpoints;

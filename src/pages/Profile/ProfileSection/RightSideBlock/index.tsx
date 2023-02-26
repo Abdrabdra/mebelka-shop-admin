@@ -1,15 +1,20 @@
 import { Divider, Grid, Paper, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import { StyledInput } from "../../../../components/styled-components/StyledInput";
-import { IProfile } from "../../../../redux/store/rtk-api/profile-rtk/profile.type";
+import {
+  IMarket,
+  IProfile,
+} from "../../../../redux/store/rtk-api/profile-rtk/profile.type";
+import MarketForm from "./MarketForm";
 import ProfileForm from "./ProfileForm";
 import { PaperRightContainer } from "./style";
 
 interface Props {
   data: IProfile;
+  marketData: IMarket;
 }
 
-const RightSideBlock: FC<Props> = ({ data }) => {
+const RightSideBlock: FC<Props> = ({ data, marketData }) => {
   return (
     <Grid item xs={3}>
       <PaperRightContainer>
@@ -71,6 +76,17 @@ const RightSideBlock: FC<Props> = ({ data }) => {
             }}
           >
             <ProfileForm data={data} />
+          </Grid>
+          <Grid
+            item
+            xs
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              // height: "calc(100vh - 200px)",
+            }}
+          >
+            <MarketForm data={marketData} />
           </Grid>
         </Grid>
       </PaperRightContainer>

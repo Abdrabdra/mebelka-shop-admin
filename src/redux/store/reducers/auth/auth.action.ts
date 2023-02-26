@@ -56,3 +56,18 @@ export const logout = createAsyncThunk<any>(
     }
   }
 );
+
+
+//DELETE
+export const profileMe = createAsyncThunk<any>(
+  "profile/me",
+  async function (_, { rejectWithValue }) {
+    try {
+      const response = await AuthService.profileMe();
+      return response.data;
+    } catch (e: any) {
+      console.log(e);
+      throw rejectWithValue("Не авторизован");
+    }
+  }
+);

@@ -16,3 +16,24 @@ export interface IProfileUpdate {
   monthOfBirth: string;
   yearOfBirth: string;
 }
+
+export interface IMarketUpdate {
+  title: string;
+  street: string;
+  phone: string;
+  email: string;
+}
+
+export interface IMarket {
+  data: IOneMarket[];
+  count: number;
+}
+
+export interface IOneMarket {
+  id: number;
+  title: string;
+  street: string;
+  phone: string;
+  imageUrl: string;
+  email: string;
+}
