@@ -19,13 +19,7 @@ const ContentListPagination: FC<Props> = ({ count }) => {
     (state) => state.filterProduct.values.page
   );
 
-    console.log()
-
   const totalPages = Math.ceil(count / selectedLimit);
-
-  console.log("count: ", count);
-  console.log("totalPages: ", totalPages);
-  console.log("selectedPage: ", selectedPage);
 
   const [page, setPage] = useState(selectedPage);
   const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {

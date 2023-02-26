@@ -36,9 +36,6 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
     }
   }, [values]);
 
-  console.log("colors: ", values.colors);
-  console.log("frames: ", values.frames);
-
   const [
     create,
     {
@@ -67,7 +64,8 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
 
   formData.append("title", values.title);
   formData.append("price", String(values.price));
-  formData.append("categoryId", String(values.categoryId));
+
+  !forUpdate && formData.append("categoryId", String(values.categoryId));
 
   formData.append("colors", values.colors.join(","));
   formData.append("frames", values.frames.join(","));
@@ -83,6 +81,8 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
   formData.append("discount", String(values.discount));
   formData.append("marketId", String(3));
 
+  console.log("values: ", values);
+
   const handleCreate = () => {
     create(formData);
   };
@@ -95,21 +95,7 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
     announceId &&
       update({
         productId: Number(announceId),
-        body: {
-          cityId: values.cityId,
-          colors: values.colors.join(","),
-          decorId: values.decorId,
-          discount: values.discount,
-          frames: values.frames.join(","),
-          height: Number(values.height),
-          length: Number(values.length),
-          width: Number(values.width),
-          laundryBoxes: values.laundryBoxes,
-          liftingMechanism: values.liftingMechanism,
-          price: values.price,
-          production: values.production,
-          title: values.title,
-        },
+        body: formData,
       });
   };
 

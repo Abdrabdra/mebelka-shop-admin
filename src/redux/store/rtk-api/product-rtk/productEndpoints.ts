@@ -35,7 +35,7 @@ export const productEndpoints = productApi.injectEndpoints({
 
     updateProduct: builder.mutation<
       any,
-      { productId: number; body: IUpdateProduct }
+      { productId: number; body: FormData }
     >({
       query: (arg) => ({
         url: `product/${arg.productId}`,

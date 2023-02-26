@@ -40,7 +40,6 @@ const AnnounceColor: FC<Props> = ({ prevData, forUpdate }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("TEST!");
     dispatch(setAnnounce({ colors: prevData }));
   }, [prevData]);
 
@@ -72,8 +71,6 @@ const AnnounceColor: FC<Props> = ({ prevData, forUpdate }) => {
         dispatch(setAnnounce({ colors: value }));
       }
     } else {
-      console.log("ВТОРАЯ");
-
       setColor(value as number[]);
       dispatch(setAnnounce({ colors: value }));
     }

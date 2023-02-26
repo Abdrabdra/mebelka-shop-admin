@@ -19,7 +19,6 @@ const AnnounceLaundryBoxes: FC<Props> = ({ prevData }) => {
     (state) => state.announce.values.laundryBoxes
   );
 
-  console.log(selectedValues);
   const [checked, setChecked] = useState(selectedValues);
 
   useEffect(() => {

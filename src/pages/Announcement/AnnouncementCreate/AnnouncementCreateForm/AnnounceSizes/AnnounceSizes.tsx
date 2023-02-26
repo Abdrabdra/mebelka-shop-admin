@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { StyledMainInput } from "../../../../../components/Input/StyledMainInput";
 import { useTypedSelector } from "../../../../../redux/store";
@@ -25,19 +25,26 @@ const AnnounceSizes: FC<Props> = ({ iwidth, iheight, ilength }) => {
     iheight ? iheight : selectedValues.height
   );
 
+  useEffect(() => {
+    dispatch(setAnnounce({ width: width }));
+  }, [width]);
+  useEffect(() => {
+    dispatch(setAnnounce({ length: length }));
+  }, [length]);
+  useEffect(() => {
+    dispatch(setAnnounce({ height: height }));
+  }, [height]);
+
   const handleChange = (e: any, type: "length" | "width" | "height") => {
     const { value } = e.target;
 
     if (type === "length") {
-      dispatch(setAnnounce({ length: value }));
       return setLength(value);
     }
     if (type === "width") {
-      dispatch(setAnnounce({ width: value }));
       return setWidth(value);
     }
     if (type === "height") {
-      dispatch(setAnnounce({ height: value }));
       return setHeight(value);
     }
   };
@@ -47,6 +54,7 @@ const AnnounceSizes: FC<Props> = ({ iwidth, iheight, ilength }) => {
       <Stack spacing={1}>
         <FormTitle title="Длина (mm)" />
         <StyledMainInput
+          name={"length"}
           value={length}
           onChange={(e) => handleChange(e, "length")}
           required
@@ -56,6 +64,7 @@ const AnnounceSizes: FC<Props> = ({ iwidth, iheight, ilength }) => {
       <Stack spacing={1}>
         <FormTitle title="Ширина (mm)" />
         <StyledMainInput
+          name={"width"}
           value={width}
           onChange={(e) => handleChange(e, "width")}
           required
@@ -65,6 +74,7 @@ const AnnounceSizes: FC<Props> = ({ iwidth, iheight, ilength }) => {
       <Stack spacing={1}>
         <FormTitle title="Высота (mm)" />
         <StyledMainInput
+          name={"height"}
           value={height}
           onChange={(e) => handleChange(e, "height")}
           required

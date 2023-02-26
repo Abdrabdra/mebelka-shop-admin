@@ -63,7 +63,6 @@ const announceSlice = createSlice({
       state.isSelected = { ...state.isSelected, ...payload };
     },
     setAnnounce: (state, { payload }) => {
-      console.log(payload);
       state.values = { ...state.values, ...payload };
     },
     setAnnounceColor: (state, { payload }) => {

@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { StyledMainInput } from "../../../../../components/Input/StyledMainInput";
 import { useTypedSelector } from "../../../../../redux/store";
@@ -13,13 +13,19 @@ interface Props {
 const AnnounceProduction: FC<Props> = ({ prevData }) => {
   const dispatch = useDispatch();
 
-  if (prevData) {
+  useEffect(() => {
     dispatch(setAnnounce({ production: prevData }));
-  }
+  }, [prevData]);
 
   const announceProduction = useTypedSelector(
     (state) => state.announce.values.production
   );
+
+  const [production, setProduction] = useState<string>();
+
+  useEffect(() => {
+    setProduction(announceProduction);
+  }, [announceProduction]);
 
   const handleChange = (e: any) => {
     const { value } = e.target;
@@ -32,7 +38,7 @@ const AnnounceProduction: FC<Props> = ({ prevData }) => {
       <FormTitle title="Название Производителя" />
       <StyledMainInput
         onChange={(e) => handleChange(e)}
-        value={announceProduction}
+        value={production}
         required
         placeholder="Введите Производителя"
       />

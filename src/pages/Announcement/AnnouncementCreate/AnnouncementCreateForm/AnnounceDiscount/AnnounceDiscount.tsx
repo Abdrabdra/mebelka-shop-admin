@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { StyledMainInput } from "../../../../../components/Input/StyledMainInput";
 import { useTypedSelector } from "../../../../../redux/store";
@@ -13,13 +13,19 @@ interface Props {
 const AnnounceDiscount: FC<Props> = ({ prevData }) => {
   const dispatch = useDispatch();
 
-  if (prevData) {
+  useEffect(() => {
     dispatch(setAnnounce({ discount: prevData }));
-  }
+  }, [prevData]);
 
   const announceDiscount = useTypedSelector(
     (state) => state.announce.values.discount
   );
+
+  const [discount, setDiscount] = useState<number>();
+
+  useEffect(() => {
+    setDiscount(announceDiscount);
+  }, [announceDiscount]);
 
   const handleChange = (e: any) => {
     const { value } = e.target;
@@ -34,7 +40,7 @@ const AnnounceDiscount: FC<Props> = ({ prevData }) => {
       <FormTitle title="Скидка" />
       <StyledMainInput
         onChange={(e) => handleChange(e)}
-        value={announceDiscount}
+        value={discount}
         required
         placeholder={`Укажите число 0-100 (%)`}
       />

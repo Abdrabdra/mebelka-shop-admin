@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { StyledMainInput } from "../../../../../components/Input/StyledMainInput";
 import { useTypedSelector } from "../../../../../redux/store";
@@ -13,13 +13,19 @@ interface Props {
 const AnnouncePrice: FC<Props> = ({ prevData }) => {
   const dispatch = useDispatch();
 
-  if (prevData) {
+  useEffect(() => {
     dispatch(setAnnounce({ price: prevData }));
-  }
+  }, [prevData]);
 
   const announcePrice = useTypedSelector(
     (state) => state.announce.values.price
   );
+
+  const [price, setPrice] = useState<number>();
+
+  useEffect(() => {
+    setPrice(announcePrice);
+  }, [announcePrice]);
 
   const handleChange = (e: any) => {
     const { value } = e.target;
@@ -32,7 +38,7 @@ const AnnouncePrice: FC<Props> = ({ prevData }) => {
       <FormTitle title="Цена KZT" />
       <StyledMainInput
         onChange={(e) => handleChange(e)}
-        value={announcePrice}
+        value={price}
         required
         placeholder={`Напишите цену`}
       />
