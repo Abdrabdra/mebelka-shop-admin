@@ -15,10 +15,10 @@ import AnnounceConfirmButton from "./AnnounceConfirmButton";
 import AnnounceProduction from "./AnnounceProduction";
 import AnnounceCity from "./AnnounceCity";
 import AnnounceDiscount from "./AnnounceDiscount";
-import { IOneAnnouncement } from "../../../../types/Announcement/OneAnnouncement.type";
 import { useDispatch } from "react-redux";
 import { refresh } from "../../../../redux/store/reducers/auth/auth.action";
 import { AppDispatch } from "../../../../redux/store";
+import { IOneAnnouncement } from "../../../../types/Announcement/IOneAnnouncement";
 
 interface FormProps {
   forUpdate?: boolean;

@@ -2,7 +2,7 @@ import {
   IAnnouncementsResponse,
   IUpdateProduct,
 } from "../../../../types/Announcement/Announcement.type";
-import { IOneAnnouncement } from "../../../../types/Announcement/OneAnnouncement.type";
+import { IOneAnnouncement } from "../../../../types/Announcement/IOneAnnouncement";
 import productApi from "./productApi";
 
 export const productEndpoints = productApi.injectEndpoints({
@@ -33,17 +33,16 @@ export const productEndpoints = productApi.injectEndpoints({
       invalidatesTags: ["product"],
     }),
 
-    updateProduct: builder.mutation<
-      any,
-      { productId: number; body: FormData }
-    >({
-      query: (arg) => ({
-        url: `product/${arg.productId}`,
-        method: "PUT",
-        body: arg.body,
-      }),
-      invalidatesTags: ["product"],
-    }),
+    updateProduct: builder.mutation<any, { productId: number; body: FormData }>(
+      {
+        query: (arg) => ({
+          url: `product/${arg.productId}`,
+          method: "PUT",
+          body: arg.body,
+        }),
+        invalidatesTags: ["product"],
+      }
+    ),
 
     deleteProductPhoto: builder.mutation<any, any>({
       query: (arg) => ({

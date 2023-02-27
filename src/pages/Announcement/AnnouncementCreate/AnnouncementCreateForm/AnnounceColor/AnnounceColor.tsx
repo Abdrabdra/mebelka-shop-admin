@@ -24,7 +24,7 @@ import {
 } from "../../../../../redux/store/reducers/announce/announce.slice";
 import { useGetProductColorQuery } from "../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
 import { useDeleteProductColorMutation } from "../../../../../redux/store/rtk-api/product-rtk/productEndpoints";
-import { IColors } from "../../../../../types/Announcement/OneAnnouncement.type";
+import { IColors } from "../../../../../types/Announcement/IOneAnnouncement";
 import { FormTitle } from "../AnnouncementCreateForm";
 import { MenuProps } from "./ColorCheckmarks.utils";
 import DeleteColors from "./DeleteColors";

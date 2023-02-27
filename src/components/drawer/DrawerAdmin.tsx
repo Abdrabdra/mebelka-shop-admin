@@ -114,14 +114,14 @@ const DrawerAdmin = () => {
       </Stack>
       <Stack>
         <List>
-          <StyledNavLink to="management">
+          {/* <StyledNavLink to="management">
             <StyledListItem>
               <StyledListItemIcon>
                 <Icon component={SettingsOutlinedIcon} />
               </StyledListItemIcon>
               Настройки
             </StyledListItem>
-          </StyledNavLink>
+          </StyledNavLink> */}
           <StyledNavLink to="">
             <StyledListItem
               onClick={handleLogOut}

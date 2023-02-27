@@ -1,7 +1,7 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import { $image_api } from "../../../../api";
-import { IOneAnnouncement } from "../../../../types/Announcement/OneAnnouncement.type";
+import { IOneAnnouncement } from "../../../../types/Announcement/IOneAnnouncement";
 import numberWithSpaces from "../../../../utils/numberWithSpaces";
 import ProductInfo from "./ProductInfo";
 import ShopInfo from "./ShopInfo";

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IImages } from "../../../../types/Announcement/OneAnnouncement.type";
+import { IImages } from "../../../../types/Announcement/IOneAnnouncement";
 
 interface IInitState {
   isSelected: {

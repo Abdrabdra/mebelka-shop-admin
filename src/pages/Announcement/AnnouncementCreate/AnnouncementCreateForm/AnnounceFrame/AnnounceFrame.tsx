@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../../../../redux/store";
 import { setAnnounce } from "../../../../../redux/store/reducers/announce/announce.slice";
 import { useGetProductFrameQuery } from "../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
-import { IFrames } from "../../../../../types/Announcement/OneAnnouncement.type";
+import { IFrames } from "../../../../../types/Announcement/IOneAnnouncement";
 import { FormTitle } from "../AnnouncementCreateForm";
 import DeleteFrame from "./DeleteFrame";
 import { MenuProps } from "./FrameCheckmarks.utils";

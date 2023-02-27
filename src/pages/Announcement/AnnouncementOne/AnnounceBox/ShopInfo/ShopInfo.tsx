@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import { StyledMainInput } from "../../../../../components/Input/StyledMainInput";
-import { IMarket } from "../../../../../types/Announcement/OneAnnouncement.type";
+import { IMarket } from "../../../../../types/Announcement/IOneAnnouncement";
 
 interface Props {
   market: IMarket;

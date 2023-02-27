@@ -9,7 +9,7 @@ import PictureOne from "./PictureOne";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { FC } from "react";
 import { useDeleteProductPhotoMutation } from "../../../../../../redux/store/rtk-api/product-rtk/productEndpoints";
-import { IImages } from "../../../../../../types/Announcement/OneAnnouncement.type";
+import { IImages } from "../../../../../../types/Announcement/IOneAnnouncement";
 
 interface Props {
   prevData?: IImages[];

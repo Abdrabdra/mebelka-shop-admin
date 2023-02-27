@@ -1,6 +1,6 @@
 import { Box, Stack } from "@mui/material";
 import { FC } from "react";
-import { IImages } from "../../../../../types/Announcement/OneAnnouncement.type";
+import { IImages } from "../../../../../types/Announcement/IOneAnnouncement";
 import { FormTitle } from "../AnnouncementCreateForm";
 import ListImages from "./ListImages";
 import UploadFile from "./UploadFile";

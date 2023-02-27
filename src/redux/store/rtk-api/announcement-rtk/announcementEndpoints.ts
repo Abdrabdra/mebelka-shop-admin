@@ -2,7 +2,7 @@ import announcementApi from "./announcementApi";
 
 import { IAnnouncementsResponse } from "../../../../types/Announcement/Announcement.type";
 import { Status } from "../../../../types/Enums";
-import { IOneAnnouncement } from "../../../../types/Announcement/OneAnnouncement.type";
+import { IOneAnnouncement } from "../../../../types/Announcement/IOneAnnouncement";
 
 export const announcementEndpoints = announcementApi.injectEndpoints({
   endpoints: (builder) => ({

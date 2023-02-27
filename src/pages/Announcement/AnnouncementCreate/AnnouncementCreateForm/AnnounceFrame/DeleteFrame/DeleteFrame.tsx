@@ -2,10 +2,10 @@ import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { FormTitle } from "../../AnnouncementCreateForm";
 
 import CloseIcon from "@mui/icons-material/Close";
-import { IFrames } from "../../../../../../types/Announcement/OneAnnouncement.type";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 import { useDeleteProductFrameMutation } from "../../../../../../redux/store/rtk-api/product-rtk/productEndpoints";
+import { IFrames } from "../../../../../../types/Announcement/IOneAnnouncement";
 
 interface Props {
   untouchedData: IFrames[];
