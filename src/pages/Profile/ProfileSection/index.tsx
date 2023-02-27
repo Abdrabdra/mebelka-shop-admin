@@ -17,12 +17,12 @@ import LeftSideBlock from "./LeftSideBlock";
 import RightSideBlock from "./RightSideBlock";
 
 const ProfileSection = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { data, isLoading, isError, error, refetch } = useGetMyProfileQuery("");
+
   useEffect(() => {
     refetch();
   }, []);
-
-  const dispatch = useDispatch<AppDispatch>();
-  const { data, isLoading, isError, error, refetch } = useGetMyProfileQuery("");
 
   const { data: marketData } = useGetMyMarketQuery(
     {
