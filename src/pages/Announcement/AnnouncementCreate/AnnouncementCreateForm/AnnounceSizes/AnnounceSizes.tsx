@@ -17,6 +17,10 @@ const AnnounceSizes: FC<Props> = ({ iwidth, iheight, ilength }) => {
 
   const selectedValues = useTypedSelector((state) => state.announce.values);
 
+  useEffect(() => {
+    dispatch(setAnnounce({ width: iwidth, height: iheight, length: ilength }));
+  }, []);
+
   const [length, setLength] = useState(
     ilength ? ilength : selectedValues.length
   );

@@ -7,9 +7,10 @@ import { Status } from "../../../../types/Enums";
 
 interface Props {
   id: number;
+  confirm: boolean;
 }
 
-const AnnounceHeader: FC<Props> = ({ id }) => {
+const AnnounceHeader: FC<Props> = ({ id, confirm }) => {
   const navigate = useNavigate();
 
   const handleNavigateBack = () => {
@@ -19,11 +20,11 @@ const AnnounceHeader: FC<Props> = ({ id }) => {
   const [updateStatus] = useUpdateStatusAnnouncementMutation();
 
   const handleAccept = () => {
-    updateStatus({ id: id, body: { status: Status.ACCEPTED } });
+    updateStatus(id);
   };
 
   const handleDenied = () => {
-    updateStatus({ id: id, body: { status: Status.DENIED } });
+    // updateStatus({ id: id, body: { status: Status.DENIED } });
   };
 
   return (
@@ -37,6 +38,21 @@ const AnnounceHeader: FC<Props> = ({ id }) => {
       </MainBaseButton>
 
       <Stack direction="row" spacing={3}>
+        {/* <Stack
+          justifyContent={"center"}
+          alignItems="center"
+          sx={{
+            padding: "12px",
+            borderRadius: "10px",
+            backgroundColor: confirm ? "#2DC36A" : "red",
+            color: "#fff",
+            fontWeight: 600,
+            fontSize: "15px",
+          }}
+        >
+          {confirm ? "Подтвержден" : "Отклонен"}
+        </Stack> */}
+
         <MainBaseButton
           onClick={handleAccept}
           sx={{
@@ -47,7 +63,7 @@ const AnnounceHeader: FC<Props> = ({ id }) => {
         >
           Подтвердить
         </MainBaseButton>
-        <MainBaseButton
+        {/* <MainBaseButton
           onClick={handleDenied}
           bgcolor={"#fff"}
           sx={{
@@ -57,7 +73,7 @@ const AnnounceHeader: FC<Props> = ({ id }) => {
           }}
         >
           Отклонить
-        </MainBaseButton>
+        </MainBaseButton> */}
       </Stack>
     </Stack>
   );

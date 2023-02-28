@@ -9,7 +9,7 @@ export const announcementEndpoints = announcementApi.injectEndpoints({
     getAnnouncements: builder.query<IAnnouncementsResponse, object>({
       query: (arg) => {
         return {
-          url: `/product`,
+          url: `/product/admin`,
           params: { ...arg },
         };
       },
@@ -41,14 +41,10 @@ export const announcementEndpoints = announcementApi.injectEndpoints({
       invalidatesTags: ["announcements"],
     }),
 
-    updateStatusAnnouncement: builder.mutation<
-      any,
-      { id: number; body: { status: Status } }
-    >({
+    updateStatusAnnouncement: builder.mutation<any, number>({
       query: (arg) => ({
-        url: `/announcement/update-status/${arg.id}`,
+        url: `/product/confirm/${arg}`,
         method: "PUT",
-        body: arg.body,
       }),
       invalidatesTags: ["announcements"],
     }),

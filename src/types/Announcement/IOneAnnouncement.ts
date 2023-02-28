@@ -5,6 +5,8 @@ export interface IOneAnnouncement {
   discount: number;
   colors: IColors[];
   images: IImages[];
+  confirm: boolean;
+  description: string;
   city: {
     id: number;
     title: string;

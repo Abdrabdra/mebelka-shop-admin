@@ -50,7 +50,7 @@ const ProductFilterContent: FC<Props> = ({ handleClose }) => {
     <Stack sx={{ paddingTop: "20px" }}>
       <Container>
         <Stack spacing={2}>
-          <ChooseMark
+          {/* <ChooseMark
             handleChangeQuery={(value) => handleChangeQuery(value)}
             chosenValues={filterValues.colors}
           />
@@ -62,17 +62,17 @@ const ProductFilterContent: FC<Props> = ({ handleClose }) => {
             <ChooseIsDiscount
               handleChangeQuery={(value) => handleChangeQuery(value)}
             />
-          </Stack>
+          </Stack> */}
 
           {/* <ChooseYear handleChangeQuery={(value) => handleChangeQuery(value)} /> */}
 
-          <ChoosePrice
+          {/* <ChoosePrice
             handleChangeQuery={(value) => handleChangeQuery(value)}
           />
           <ChooseCity handleChangeQuery={(value) => handleChangeQuery(value)} />
           <ChooseCategory
             handleChangeQuery={(value) => handleChangeQuery(value)}
-          />
+          /> */}
         </Stack>
       </Container>
 

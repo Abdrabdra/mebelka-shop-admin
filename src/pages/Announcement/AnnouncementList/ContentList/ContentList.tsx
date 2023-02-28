@@ -6,6 +6,7 @@ import ContentListPagination from "./ContentListPagination";
 import { useTypedSelector } from "../../../../redux/store";
 import ContentListTable from "./ContentListTable";
 import { useGetAnnouncementsQuery } from "../../../../redux/store/rtk-api/announcement-rtk/announcementEndpoints";
+import { useGetProductsQuery } from "../../../../redux/store/rtk-api/product-rtk/productEndpoints";
 
 interface Props {
   forArchive?: boolean;
@@ -22,7 +23,7 @@ const ContentList: FC<Props> = ({ withoutPagination }) => {
     ...filterProductValues,
   };
 
-  const { data, isLoading, isFetching, isSuccess } = useGetAnnouncementsQuery(
+  const { data, isLoading, isFetching, isSuccess } = useGetProductsQuery(
     queryWithFilterParams,
     {
       refetchOnMountOrArgChange: true,

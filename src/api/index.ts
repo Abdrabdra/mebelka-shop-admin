@@ -47,4 +47,4 @@ $api.interceptors.response.use(
   }
 );
 
-export const $image_api = "https://autolike.ams3.digitaloceanspaces.com/";
+export const $image_api = "https://mebel.ams3.digitaloceanspaces.com";

@@ -10,7 +10,7 @@ export const productEndpoints = productApi.injectEndpoints({
     getProducts: builder.query<IAnnouncementsResponse, object>({
       query: (arg) => {
         return {
-          url: `/product`,
+          url: `/product/admin`,
           params: { ...arg },
         };
       },
@@ -43,6 +43,14 @@ export const productEndpoints = productApi.injectEndpoints({
         invalidatesTags: ["product"],
       }
     ),
+
+    updateStatusProduct: builder.mutation<any, number>({
+      query: (arg) => ({
+        url: `/product/confirm/${arg}`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["product"],
+    }),
 
     deleteProductPhoto: builder.mutation<any, any>({
       query: (arg) => ({
@@ -80,6 +88,7 @@ export const {
   useGetOneProductQuery,
   useCreateProductMutation,
   useUpdateProductMutation,
+  useUpdateStatusProductMutation,
 
   useDeleteProductPhotoMutation,
   useDeleteProductColorMutation,

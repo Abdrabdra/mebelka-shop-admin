@@ -21,13 +21,13 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
 
   useEffect(() => {
     if (
-      (values.file.length > 0 || values.serverFile.length > 0) &&
+      // (values.file.length > 0 || values.serverFile.length > 0) &&
       values.title &&
       values.production &&
       values.cityId &&
       (forUpdate ? !values.categoryId : values.categoryId) &&
-      values.colors.length > 0 &&
-      values.frames.length > 0 &&
+      // values.colors.length > 0 &&
+      // values.frames.length > 0 &&
       values.decorId
     ) {
       setIsFilled(true);
@@ -64,6 +64,7 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
 
   formData.append("title", values.title);
   formData.append("price", String(values.price));
+  formData.append("description", String(values.description));
 
   !forUpdate && formData.append("categoryId", String(values.categoryId));
 

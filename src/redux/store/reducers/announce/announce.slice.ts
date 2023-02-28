@@ -23,6 +23,7 @@ interface IInitState {
     production: string;
     cityId?: number;
     discount: number;
+    description: string;
 
     marketId?: number;
   };
@@ -50,6 +51,7 @@ const initialState: IInitState = {
     production: "",
     cityId: undefined,
     discount: 0,
+    description: "",
 
     marketId: undefined,
   },

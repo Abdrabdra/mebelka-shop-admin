@@ -1,5 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import { useGetOneAnnouncementQuery } from "../../../redux/store/rtk-api/announcement-rtk/announcementEndpoints";
 import { useGetOneProductQuery } from "../../../redux/store/rtk-api/product-rtk/productEndpoints";
 import AnnouncementCreateForm from "../AnnouncementCreate/AnnouncementCreateForm";
 
@@ -14,7 +15,9 @@ const AnnouncementOne = () => {
 
   return (
     <Stack spacing={4}>
-      {announceId && <AnnounceHeader id={Number(announceId)} />}
+      {announceId && data && (
+        <AnnounceHeader id={Number(announceId)} confirm={data.confirm} />
+      )}
 
       {isLoading ? (
         "Загрузка..."

@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { refresh } from "../../../../redux/store/reducers/auth/auth.action";
 import { AppDispatch } from "../../../../redux/store";
 import { IOneAnnouncement } from "../../../../types/Announcement/IOneAnnouncement";
+import AnnounceDescription from "./AnnounceDescription";
 
 interface FormProps {
   forUpdate?: boolean;
@@ -33,6 +34,7 @@ const AnnouncementCreateForm: FC<FormProps> = ({ forUpdate, updateData }) => {
       <AnnounceFile prevData={updateData?.images} />
       <AnnounceTitle prevData={updateData?.title} />
       <AnnounceProduction prevData={updateData?.info.production} />
+      <AnnounceDescription prevData={updateData?.description} />
       <AnnounceCity prevData={updateData?.city.id} />
       <AnnouncePrice prevData={updateData?.price} />
       <AnnounceDiscount prevData={updateData?.discount} />
