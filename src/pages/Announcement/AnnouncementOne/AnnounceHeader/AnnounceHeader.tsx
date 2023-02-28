@@ -53,7 +53,7 @@ const AnnounceHeader: FC<Props> = ({ id, confirm }) => {
           {confirm ? "Подтвержден" : "Отклонен"}
         </Stack> */}
 
-        <MainBaseButton
+        {/* <MainBaseButton
           onClick={handleAccept}
           sx={{
             backgroundColor: "#2DC36A",
@@ -62,7 +62,7 @@ const AnnounceHeader: FC<Props> = ({ id, confirm }) => {
           }}
         >
           Подтвердить
-        </MainBaseButton>
+        </MainBaseButton> */}
         {/* <MainBaseButton
           onClick={handleDenied}
           bgcolor={"#fff"}
