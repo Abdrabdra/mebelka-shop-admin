@@ -28,6 +28,7 @@ import managementApi from "./rtk-api/management-rtk/managementApi";
 import cityApi from "./rtk-api/city-rtk/cityApi";
 import announcementApi from "./rtk-api/announcement-rtk/announcementApi";
 import productApi from "./rtk-api/product-rtk/productApi";
+import orderApi from "./rtk-api/order-rtk/orderApi";
 
 const persistConfig = {
   key: "root",
@@ -49,6 +50,7 @@ const rootReducer = combineReducers({
   [cityApi.reducerPath]: cityApi.reducer,
   [announcementApi.reducerPath]: announcementApi.reducer,
   [productApi.reducerPath]: productApi.reducer,
+  [orderApi.reducerPath]: orderApi.reducer,
 
   [userApi.reducerPath]: userApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
@@ -72,7 +74,8 @@ export const store = configureStore({
       cityApi.middleware,
       announcementApi.middleware,
       productApi.middleware,
-      profileApi.middleware
+      profileApi.middleware,
+      orderApi.middleware
     ),
 });
 

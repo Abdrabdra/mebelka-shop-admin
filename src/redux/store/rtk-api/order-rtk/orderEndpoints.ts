@@ -9,7 +9,7 @@ export const orderEndpoints = orderApi.injectEndpoints({
   endpoints: (builder) => ({
     getOrder: builder.query<IGetOrderResponse, any>({
       query: (arg) => ({
-        url: `order`,
+        url: `order/market`,
         method: "GET",
       }),
       providesTags: ["order"],
@@ -31,6 +31,9 @@ export const orderEndpoints = orderApi.injectEndpoints({
       }),
       invalidatesTags: ["order"],
     }),
+
+
+
   }),
 });
 

@@ -22,7 +22,7 @@ const Order = () => {
         <Routes>
           <Route index element={<OrderList />} />
 
-          <Route path={":id"} element={<OrderOne />} />
+          <Route path={"one/:id"} element={<OrderOne />} />
         </Routes>
       </Suspense>
     </Box>

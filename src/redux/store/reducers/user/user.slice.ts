@@ -1,25 +1,28 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface IInitState {
-    role: string | null
-
+  role: string | null;
+  marketId?: number;
 }
 
 const initialState: IInitState = {
-    role: null,
-}
+  role: null,
+  marketId: undefined,
+};
 
 const userSlice = createSlice({
-    name: 'user/',
-    initialState,
-    reducers: {
-        setRole: (state, {payload}) => {
-            //debugger
-            state.role = payload
-        }
-    }
-})
+  name: "user/",
+  initialState,
+  reducers: {
+    setRole: (state, { payload }) => {
+      state.role = payload;
+    },
+    setUserMarketId: (state, { payload }) => {
+      state.marketId = payload;
+    },
+  },
+});
 
-export const {setRole} = userSlice.actions
+export const { setRole, setUserMarketId } = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;

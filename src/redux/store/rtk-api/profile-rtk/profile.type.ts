@@ -6,6 +6,10 @@ export interface IProfile {
   dayOfBirth: string;
   monthOfBirth: string;
   yearOfBirth: string;
+  user: {
+    id: number;
+    phone: string;
+  };
 }
 
 export interface IProfileUpdate {

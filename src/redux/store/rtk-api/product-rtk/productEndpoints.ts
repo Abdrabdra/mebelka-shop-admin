@@ -10,7 +10,7 @@ export const productEndpoints = productApi.injectEndpoints({
     getProducts: builder.query<IAnnouncementsResponse, object>({
       query: (arg) => {
         return {
-          url: `/product/admin`,
+          url: `/product`,
           params: { ...arg },
         };
       },

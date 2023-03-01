@@ -16,6 +16,7 @@ interface Props {
 
 const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
   const values = useTypedSelector((state) => state.announce.values);
+  const userMarketId = useTypedSelector((state) => state.user.marketId);
 
   const [isFilled, setIsFilled] = useState(false);
 
@@ -80,7 +81,7 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
   formData.append("production", String(values.production));
   formData.append("cityId", String(values.cityId));
   formData.append("discount", String(values.discount));
-  formData.append("marketId", String(3));
+  formData.append("marketId", String(userMarketId));
 
   console.log("values: ", values);
 

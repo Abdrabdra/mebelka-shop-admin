@@ -2,12 +2,13 @@
 import { Grid, Paper } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../redux/store";
+import { AppDispatch, useTypedSelector } from "../../../redux/store";
 import { logout } from "../../../redux/store/reducers/auth/auth.action";
 import {
   setAuth,
   setStatus,
 } from "../../../redux/store/reducers/auth/auth.slice";
+import { setUserMarketId } from "../../../redux/store/reducers/user/user.slice";
 import {
   useGetMyMarketQuery,
   useGetMyProfileQuery,
@@ -26,10 +27,14 @@ const ProfileSection = () => {
 
   const { data: marketData } = useGetMyMarketQuery(
     {
-      userId: Number(data && data.id),
+      userId: Number(data && data.user.id),
     },
     { skip: data === undefined ? true : false }
   );
+
+  useEffect(() => {
+    dispatch(setUserMarketId(marketData?.data[0].id));
+  }, [marketData]);
 
   useEffect(() => {
     if (error && "status" in error && error.status === 401) {

@@ -22,19 +22,20 @@ import {
   TableDivider,
 } from "../../../../../components/Table/TableRounded/TableRounded.module";
 import { IAnnouncement } from "../../../../../types/Announcement/Announcement.type";
+import { IGetOrderResponse } from "../../../../../types/Order/IOrder";
 import numberWithSpaces from "../../../../../utils/numberWithSpaces";
 
-const tableHead = ["Название", "Артикул", "Категория"];
+const tableHead = ["Артикул", "Общая стоимость"];
 
 interface Props {
-  tableData: IAnnouncement[];
+  tableData: IGetOrderResponse;
 }
 
 const ContentListTable: FC<Props> = ({ tableData }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (id: number) => {
-    navigate(`/app/announcement/one/${id}`);
+    navigate(`/app/order/one/${id}`);
   };
 
   return (
@@ -53,7 +54,7 @@ const ContentListTable: FC<Props> = ({ tableData }) => {
         </TableHead>
 
         <TableBody>
-          {tableData.map((row) => (
+          {tableData.data.map((row) => (
             <StyledBodyRow key={row.id}>
               <StyledBodyCellFirst>
                 <Stack direction="row" spacing={1}>
@@ -66,7 +67,7 @@ const ContentListTable: FC<Props> = ({ tableData }) => {
                       height: "60px",
                     }}
                   >
-                    {row?.images[0]?.imageUrl && (
+                    {/* {row?.images[0]?.imageUrl && (
                       <img
                         src={`${$image_api}/${row.images[0].imageUrl}`}
                         style={{
@@ -75,20 +76,19 @@ const ContentListTable: FC<Props> = ({ tableData }) => {
                           borderRadius: "10px",
                         }}
                       />
-                    )}
+                    )} */}
                   </Box>
                   <Stack justifyContent={"center"}>
-                    <Typography>{row.title}</Typography>
-                    <Typography variant="h6" sx={{ color: "primary.main" }}>
-                      {`${numberWithSpaces(row.price)} KZT`}
-                    </Typography>
+                    <Typography>Заказ {row.id}</Typography>
                   </Stack>
                 </Stack>
               </StyledBodyCellFirst>
 
-              <StyledBodyCell>{row.id}</StyledBodyCell>
-
-              <StyledBodyCell>Мебель</StyledBodyCell>
+              <StyledBodyCell>
+                <Typography variant="h6" sx={{ color: "primary.main" }}>
+                  {`${numberWithSpaces(Number(row.totalPrice.toFixed(2)))} KZT`}
+                </Typography>
+              </StyledBodyCell>
 
               <StyledBodyCellLast>
                 <MainBaseButton
