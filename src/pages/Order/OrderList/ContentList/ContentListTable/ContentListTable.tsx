@@ -21,14 +21,16 @@ import {
   StyledHeadRow,
   TableDivider,
 } from "../../../../../components/Table/TableRounded/TableRounded.module";
+import { StatusChip } from "../../../../../components/ui/Chip";
 import { IAnnouncement } from "../../../../../types/Announcement/Announcement.type";
+import { IMarketOrderResponse } from "../../../../../types/Order/IMarketOrder";
 import { IGetOrderResponse } from "../../../../../types/Order/IOrder";
 import numberWithSpaces from "../../../../../utils/numberWithSpaces";
 
-const tableHead = ["Артикул", "Общая стоимость"];
+const tableHead = ["Артикул", "Общая стоимость", "Статус"];
 
 interface Props {
-  tableData: IGetOrderResponse;
+  tableData: IMarketOrderResponse;
 }
 
 const ContentListTable: FC<Props> = ({ tableData }) => {
@@ -88,6 +90,10 @@ const ContentListTable: FC<Props> = ({ tableData }) => {
                 <Typography variant="h6" sx={{ color: "primary.main" }}>
                   {`${numberWithSpaces(Number(row.totalPrice.toFixed(2)))} KZT`}
                 </Typography>
+              </StyledBodyCell>
+
+              <StyledBodyCell>
+                <StatusChip status={row.status} />
               </StyledBodyCell>
 
               <StyledBodyCellLast>
