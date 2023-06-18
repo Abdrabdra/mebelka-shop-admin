@@ -6,6 +6,10 @@ export const cityEndpoints = cityApi.injectEndpoints({
     getCity: builder.query<IGetRegion[], any>({
       query: () => ({
         url: `region`,
+        params: {
+          page: 1,
+          limit: 200,
+        },
       }),
       providesTags: ["City"],
     }),
