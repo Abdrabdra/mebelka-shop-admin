@@ -21,6 +21,7 @@ import {
   StyledHeadRow,
   TableDivider,
 } from "../../../../../components/Table/TableRounded/TableRounded.module";
+import { useDeleteProductMutation } from "../../../../../redux/store/rtk-api/product-rtk/productEndpoints";
 import { IAnnouncement } from "../../../../../types/Announcement/Announcement.type";
 import numberWithSpaces from "../../../../../utils/numberWithSpaces";
 
@@ -32,9 +33,14 @@ interface Props {
 
 const ContentListTable: FC<Props> = ({ tableData }) => {
   const navigate = useNavigate();
+  const [deleteProduct] = useDeleteProductMutation();
 
   const handleNavigate = (id: number) => {
     navigate(`/app/announcement/one/${id}`);
+  };
+
+  const handleDelete = (id: number) => {
+    deleteProduct({ id: id });
   };
 
   return (
@@ -91,13 +97,22 @@ const ContentListTable: FC<Props> = ({ tableData }) => {
               <StyledBodyCell>Мебель</StyledBodyCell>
 
               <StyledBodyCellLast>
-                <MainBaseButton
-                  onClick={() => handleNavigate(row.id)}
-                  bgcolor="primary.main"
-                  sx={{ height: "40px", maxWidth: "180px" }}
-                >
-                  Редактировать
-                </MainBaseButton>
+                <Stack direction="row" spacing={1}>
+                  <MainBaseButton
+                    onClick={() => handleNavigate(row.id)}
+                    bgcolor="primary.main"
+                    sx={{ height: "40px", maxWidth: "180px" }}
+                  >
+                    Редактировать
+                  </MainBaseButton>
+                  <MainBaseButton
+                    onClick={() => handleDelete(row.id)}
+                    bgcolor="error.main"
+                    sx={{ height: "40px", maxWidth: "180px" }}
+                  >
+                    Удалить
+                  </MainBaseButton>
+                </Stack>
               </StyledBodyCellLast>
             </StyledBodyRow>
           ))}
