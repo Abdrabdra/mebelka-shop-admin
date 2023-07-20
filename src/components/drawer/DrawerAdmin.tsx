@@ -94,7 +94,7 @@ const DrawerAdmin = () => {
             <Box
               sx={{ fontWeight: 700, letterSpacing: "1px", fontSize: "32px" }}
             >
-              iSandyq
+              Loom
             </Box>
           </Toolbar>
         </NavLink>

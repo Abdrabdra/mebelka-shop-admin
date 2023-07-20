@@ -9,10 +9,7 @@ import {
 import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../../../../../redux/store";
-import {
-  setAnnounce,
-  setIsSelected,
-} from "../../../../../../redux/store/reducers/announce/announce.slice";
+import { setAnnounce } from "../../../../../../redux/store/reducers/announce/announce.slice";
 import { useGetCategoryQuery } from "../../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
 import { FormTitle } from "../../AnnouncementCreateForm";
 
@@ -20,34 +17,38 @@ interface Props {
   parentId: string | number;
 }
 
-const ChildCategory: FC<Props> = ({ parentId }) => {
+const ChildCategory2: FC<Props> = ({ parentId }) => {
   const dispatch = useDispatch();
+
+  const lvl2Category = useTypedSelector(
+    (state) => state.announce.values.lvl2Category
+  );
+
   const { data } = useGetCategoryQuery(
-    { parentId: parentId },
+    { parentId: lvl2Category },
     { skip: parentId ? false : true }
   );
 
-  const isParentSelected = useTypedSelector(
-    (state) => state.announce.isSelected.parentCategory
+  const isLvl2Category = useTypedSelector(
+    (state) => state.announce.isSelected.lvl2Category
   );
 
   const [child, setChild] = useState("");
   const handleChildChange = (event: SelectChangeEvent) => {
     setChild(event.target.value as string);
 
-    dispatch(setIsSelected({ lvl2Category: true }));
-    dispatch(setAnnounce({ lvl2Category: event.target.value }));
+    dispatch(setAnnounce({ lvl3Category: event.target.value }));
   };
 
   return (
     <Stack spacing={1} sx={{ minWidth: 120 }}>
-      <FormTitle title="Подкатегория 2" />
+      <FormTitle title="Подкатегория 3" />
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">
           Выбрать подкатегорию
         </InputLabel>
         <Select
-          disabled={isParentSelected ? false : true}
+          disabled={isLvl2Category ? false : true}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={child}
@@ -65,4 +66,4 @@ const ChildCategory: FC<Props> = ({ parentId }) => {
   );
 };
 
-export default ChildCategory;
+export default ChildCategory2;

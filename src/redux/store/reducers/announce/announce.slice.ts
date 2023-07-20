@@ -4,6 +4,7 @@ import { IImages } from "../../../../types/Announcement/IOneAnnouncement";
 interface IInitState {
   isSelected: {
     parentCategory: boolean;
+    lvl2Category: boolean;
   };
   values: {
     file: File[];
@@ -12,6 +13,8 @@ interface IInitState {
     title: string;
     price: number;
     categoryId?: number;
+    lvl2Category?: number;
+    lvl3Category?: number;
     colors: number[];
     length: number;
     width: number;
@@ -32,6 +35,7 @@ interface IInitState {
 const initialState: IInitState = {
   isSelected: {
     parentCategory: false,
+    lvl2Category: false,
   },
   values: {
     file: [],
@@ -40,6 +44,8 @@ const initialState: IInitState = {
     title: "",
     price: 0,
     categoryId: undefined,
+    lvl2Category: undefined,
+    lvl3Category: undefined,
     colors: [],
     length: 0,
     width: 0,

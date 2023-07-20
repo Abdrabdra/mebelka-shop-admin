@@ -27,13 +27,13 @@ const ProfileSection = () => {
 
   const { data: marketData } = useGetMyMarketQuery(
     {
-      userId: Number(data && data.user.id),
+      userId: Number(data && data.user?.id),
     },
     { skip: data === undefined ? true : false }
   );
 
   useEffect(() => {
-    dispatch(setUserMarketId(marketData?.data[0].id));
+    dispatch(setUserMarketId(marketData?.data[0]?.id));
   }, [marketData]);
 
   useEffect(() => {

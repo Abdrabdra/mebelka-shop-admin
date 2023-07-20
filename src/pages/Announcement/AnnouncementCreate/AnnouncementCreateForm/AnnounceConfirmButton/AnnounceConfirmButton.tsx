@@ -26,7 +26,7 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
       values.title &&
       values.production &&
       values.cityId &&
-      (forUpdate ? !values.categoryId : values.categoryId) &&
+      (forUpdate ? !values.lvl3Category : values.lvl3Category) &&
       // values.colors.length > 0 &&
       // values.frames.length > 0 &&
       values.decorId
@@ -67,7 +67,7 @@ const AnnounceConfirmButton: FC<Props> = ({ forUpdate }) => {
   formData.append("price", String(values.price));
   formData.append("description", String(values.description));
 
-  !forUpdate && formData.append("categoryId", String(values.categoryId));
+  !forUpdate && formData.append("categoryId", String(values.lvl3Category));
 
   formData.append("colors", values.colors.join(","));
   formData.append("frames", values.frames.join(","));

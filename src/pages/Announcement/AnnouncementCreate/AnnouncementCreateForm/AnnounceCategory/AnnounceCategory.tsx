@@ -13,6 +13,7 @@ import { setIsSelected } from "../../../../../redux/store/reducers/announce/anno
 import { useGetCategoryQuery } from "../../../../../redux/store/rtk-api/management-rtk/managementEndpoints";
 import { FormTitle } from "../AnnouncementCreateForm";
 import ChildCategory from "./ChildCategory";
+import ChildCategory2 from "./ChildCategory2";
 
 interface Props {
   blocked: boolean;
@@ -32,7 +33,7 @@ const AnnounceCategory: FC<Props> = ({ blocked }) => {
   return (
     <Stack spacing={2.5}>
       <Stack spacing={1} sx={{ minWidth: 120 }}>
-        <FormTitle title="Категория" />
+        <FormTitle title="Категория 1" />
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">
             Выбрать категорию
@@ -55,6 +56,7 @@ const AnnounceCategory: FC<Props> = ({ blocked }) => {
       </Stack>
 
       <ChildCategory parentId={parent} />
+      <ChildCategory2 parentId={parent} />
     </Stack>
   );
 };
