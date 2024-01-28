@@ -8,23 +8,4 @@ server {
                  allow all;
                  root /var/www/html;
      }
-     return 301 https://shop.loom.kz$request_uri;
-}
-
-server {
-     listen 443 ssl http2;
-     listen [::]:443  ssl http2;
-     server_name shop.loom.kz www.shop.loom.kz;
-     client_max_body_size 100M;
-     server_tokens off;
-     ssl_certificate /etc/letsencrypt/live/shop.loom.kz/fullchain.pem;
-     ssl_certificate_key /etc/letsencrypt/live/shop.loom.kz/privkey.pem;
-
-     location / {
-       add_header 'Access-Control-Allow-Origin' $http_origin;
-       add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS,PUT,PATCH,DELETE';
-       add_header 'Access-Control-Allow-Credentials' 'true';
-       proxy_pass http://front:3000/;
-
-   }
 }
